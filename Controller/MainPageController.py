@@ -1,5 +1,5 @@
-import BankingController
-import NewAccountPage
+from BankingController import BankingController
+#import NewAccountPage
 #import BankingModel
 #import Customer
 #import Account
