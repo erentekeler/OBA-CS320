@@ -13,17 +13,4 @@ layout = [
 
 window = sg.Window('Ozyegin Banking Application - OBA', layout,input, size=(300,250),element_justification='c')    
 
-while True:
-    events, values = window.read()   
-
-    user_id = values['ID']
-    user_password = values['Password']
-
-    if(events == 'LOGIN'):
-        
-    elif(events == 'REGISTER'):    
-  
-window.close()
-
-
 
