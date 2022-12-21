@@ -2,6 +2,7 @@ import PySimpleGUI as sg
 
 sg.theme('DarkGreen')   # select theme     
 
+
 layout = [
         [sg.Text('Register Your Account',size = (200, 1), font=('Arial',20,'bold'),justification = 'center')],   
         [sg.Text('Name: ',font=('Arial',12,'bold'),size =(12, 1)), sg.InputText(key='ID', size=(20,1))],   
