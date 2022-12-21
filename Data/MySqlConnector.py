@@ -13,7 +13,7 @@ class MySqlConnector:
             cursor.execute(query)
             if commit:
                 self.connection.commit()
-            return cursor.fetchone(),
+            return cursor.fetchone()
         except pymysql.Error as e:
             print("Error while connecting to MySQL", e)
         finally:

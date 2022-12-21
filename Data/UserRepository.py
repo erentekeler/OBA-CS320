@@ -16,6 +16,10 @@ class UserRepository:
         result = self.connector.executeQuery(query, True)
         print(result)
 
+    def getLoginUser(self, identityNumber, password):
+        query = f'select * from User where IdentityNumber = \'{identityNumber}\' AND Password = \'{password}\''
+        result = self.connector.executeQuery(query)
+        return result
 
 userRepository = UserRepository()
 result = userRepository.createUser(firstName= "Selen", lastName= "Selena", identityNumber="1234", password="123")
