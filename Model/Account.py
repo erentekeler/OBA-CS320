@@ -25,14 +25,19 @@ class Account:
         self.accountNumber = accountNumber
         self.IBAN = IBAN
 
-    def makeTransaction(self, toIBAN, amount):
-        new_transaction = Transaction(fromIBAN, toIBAN, amount)
+    def makeTransaction(self, fromIBAN, toIBAN, amount):
+        new_transaction = Transaction(fromIBAN, toIBAN, amount, 1)
 
         for account in self.accountList:
             if account.IBAN == fromIBAN:
                 account.transactionList.append = new_transaction
+                account.updateDatabase()
+                break
 
+        new_transaction = Transaction(fromIBAN, toIBAN, amount, 0)
         receiver = findAccountFromIBAN(toIBAN)
+        receiver.transactionList.append(new_transaction)
+        receiver.updataDatabase()
 
     def findAccountFromIBAN(self, IBAN) -> Account:
         print("search database and find the related account")
