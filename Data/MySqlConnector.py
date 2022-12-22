@@ -2,7 +2,7 @@ import pymysql
 
 class MySqlConnector:
     def __init__(self):
-        self.connection = pymysql.connect(host="localhost", user="root", password="irem123.", database="obadb")
+        self.connection = pymysql.connect(host="localhost", user="root", password="CS320", database="obadb")
 
     #eğer select komutu varsa default commit false olduğu için parametreyi çağırmaya gerek yok.
     #diğer komutlar için commit parametresi true olarak çağrılmalı.

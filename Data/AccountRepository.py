@@ -26,3 +26,11 @@ class AccountRepository:
         query = "select * from Account where AccountNumber = " + str(accountNumber)
         result = self.connector.executeQuery(query)
         return result
+
+    def updateBalance(self, amount, accountNumber):
+        query = "UPDATE account SET Balance = " + str(amount) + " WHERE AccountNumber = " + str(accountNumber)
+        result = self.connector.executeQuery(query, True)
+
+A = AccountRepository()
+#A.createAccount("Eren", "TL", "1234567890", 1)
+#A.updateBalance(350, "1234567890")
