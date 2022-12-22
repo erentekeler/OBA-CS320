@@ -1,11 +1,12 @@
 import sys
 import os
-import py
 os.path.normpath(os.getcwd() + os.sep + os.pardir)
 sys.path.insert(1,os.getcwd())
 from GUI import loginPage
 import Controller
+from Controller import MainPageController as mp
 from Controller import BankingController as bc
+from Controller import RegisterPageController as rg
 
 
 class LoginPageController(bc.BankingController):
@@ -13,23 +14,29 @@ class LoginPageController(bc.BankingController):
         super().__init__()
         #self.model=self.getActionModel()
         #self.view=self.getView()
-        self.window=self.getView(loginPage)
+        self.view=self.getView(loginPage)
         
 
     def openPage(self):
         while True:
-            events, values = self.window.read()   
+            events, values = self.view.read()   
 
             user_id = values['ID']
             user_password = values['Password']
 
             if(events == 'LOGIN'):
-                #MainPage()
+                #model
+                self.view.close()
+                main=mp.MainPageController()
+                main.openPage()
                 break
             elif(events == 'REGISTER'):    
-                #registerpage()
-                break
-        self.window.close()
+                register=rg.RegisterPageController()
+                register.openPage()
+                continue
+                
+        self.view.close()
+        
 
     def getActionModel(self):
         pass
@@ -38,3 +45,5 @@ class LoginPageController(bc.BankingController):
 
 
 
+a=LoginPageController()
+a.openPage()

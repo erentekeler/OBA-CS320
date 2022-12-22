@@ -2,8 +2,10 @@ import sys
 import os
 import GUI
 import Controller
-from Controller import BankingController
-from Controller import LoginPageController
+import Model
+import Data
+from Controller import LoginPageController as lg
 
-a=LoginPageController.LoginPageController()
+
+a=lg.LoginPageController()
 a.openPage()
