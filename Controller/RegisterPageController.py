@@ -5,6 +5,8 @@ sys.path.insert(1,os.getcwd())
 from GUI import registerPage
 import Controller
 from Controller import BankingController as bc
+from Model import Customer as cus
+#from Model import Account as acc
 
 class RegisterPageController(bc.BankingController):
     def __init__(self) -> None:
@@ -20,9 +22,14 @@ class RegisterPageController(bc.BankingController):
     def openPage(self):
         while True:
             events, values = self.view.read()
-            name=values['ID']   
+            name=values['Name']
+            surname=values['Surname']
+            tckn=values['givenID']
+            password=values['password']
+            accounts=[]
             if(events=="Create Account"):
-            #model
+                customer=cus.Customer(name,surname,tckn,password,accounts)
+                customer.updateDatabase()
                 break
             elif(events=="SIGN IN"):
                 break
@@ -30,5 +37,3 @@ class RegisterPageController(bc.BankingController):
 
         self.view.close()
 
-a=RegisterPageController()
-a.openPage()
