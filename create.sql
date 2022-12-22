@@ -13,7 +13,7 @@ CREATE TABLE Account (
   AccoundId int NOT NULL AUTO_INCREMENT,
   AccountName varchar(255) NOT NULL,
   CurrencyType varchar(5) NOT NULL,
-  AccountNumber char(10) NOT NULL AUTO_INCREMENT,
+  AccountNumber char(10),
   Balance double NOT NULL DEFAULT '0',
   UserId int NOT NULL,
   PRIMARY KEY (AccoundId),
