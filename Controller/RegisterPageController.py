@@ -16,22 +16,21 @@ class RegisterPageController(bc.BankingController):
     
     def getActionModel(self):
         pass
-    def getView(self,registerPage):
+    def getView(self, registerPage):
         return registerPage.window
     
     def openPage(self):
         while True:
             events, values = self.view.read()
-            name=values['Name']
-            surname=values['Surname']
-            tckn=values['givenID']
-            password=values['Password']
-            accounts=[]
-            if(events=="Create Account"):
-                customer=cus.Customer(name,surname,tckn,password,accounts)
-                customer.updateDatabase()
-                break
-            elif(events=="SIGN IN"):
+            name = values['Name']
+            surname = values['Surname']
+            tckn = values['givenID']
+            password = values['Password']
+            if events == "Create Account":
+                customer = cus.Customer()
+                if customer.registerCheck(tckn):
+                    customer.createUser(name, surname, password, tckn)
+            elif events == "SIGN IN":
                 break
 
 
