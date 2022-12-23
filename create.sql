@@ -9,12 +9,12 @@ CREATE TABLE User (
 );
 
 CREATE TABLE Account (
-  AccoundId int NOT NULL AUTO_INCREMENT,
+  AccountId int NOT NULL AUTO_INCREMENT,
   AccountName varchar(255) NOT NULL,
   CurrencyType varchar(5) NOT NULL,
   Balance double NOT NULL DEFAULT '0',
   UserId int NOT NULL,
-  PRIMARY KEY (AccoundId),
+  PRIMARY KEY (AccountId),
   FOREIGN KEY (UserId) REFERENCES user (UserId)
 );
 
