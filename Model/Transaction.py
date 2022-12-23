@@ -4,7 +4,4 @@ class Transaction:
         self.amount = amount
         self.fromIBAN = fromIBAN
         self.toIBAN = toIBAN
-        self.status = status #0 if received, 1 if sent
-
-    def updateDatabase(self):
-        print("Transaction.updateDatabase()")
+        self.status = status  # 0 if received, 1 if sent

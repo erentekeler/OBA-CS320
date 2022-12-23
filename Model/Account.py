@@ -1,4 +1,7 @@
 import random
+from Data.AccountRepository import AccountRepository
+from Model.Transaction import Transaction
+
 
 class Account:
 
@@ -13,34 +16,17 @@ class Account:
 
         for i in range(8):
             if i == 1:
-                digit = str(randint(1,9))
+                digit = str(random.randint(1, 9))
             else:
-                digit = str(randint(0,9))
+                digit = str(random.randint(0, 9))
             accountNumber = accountNumber + digit
 
-
-        for i in range(22):
-            IBAN = IBAN + str(randint(0,9))
-
         self.accountNumber = accountNumber
-        self.IBAN = IBAN
 
-    def makeTransaction(self, fromIBAN, toIBAN, amount):
-        new_transaction = Transaction(fromIBAN, toIBAN, amount, 1)
-
-        for account in self.accountList:
-            if account.IBAN == fromIBAN:
-                account.transactionList.append = new_transaction
-                account.updateDatabase()
-                break
-
-        new_transaction = Transaction(fromIBAN, toIBAN, amount, 0)
-        receiver = findAccountFromIBAN(toIBAN)
-        receiver.transactionList.append(new_transaction)
-        receiver.updataDatabase()
-
-    def findAccountFromIBAN(self, IBAN) -> Account:
-        print("search database and find the related account")
-
-    def updateDatabase(self):
-        print("Account.updateDatabase()")
+    def makeTransaction(self, toID, amount):
+        fromID = self.accountNumber
+        new_transaction = Transaction(fromID, toID, amount, 1)
+        repo = AccountRepository()
+        repo.updateBalance(-amount, fromID)
+        repo.updateBalance(amount, toID)
+        self.transactionList.append(new_transaction)
