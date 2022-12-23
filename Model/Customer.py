@@ -11,7 +11,8 @@ class Customer:
         pass
 
     def createUser(self, firstName, lastName, password, identityNumber):
-        users.createUser(users(), firstName, lastName, password, identityNumber)
+        UserTable = users.UserRepository()
+        UserTable.createUser(firstName, lastName, password, identityNumber)
 
     def loginCheck(self, identityNumber, password) -> bool:
         UserTable = users.UserRepository()
@@ -20,6 +21,7 @@ class Customer:
 
 
     def registerCheck(self, identityNumber):
-        UserTable = users()
-        return users.getUserIdFromIdentityNo(UserTable, identityNumber) is not None
+        UserTable = users.UserRepository()
+        if (identityNumber == ""): return False
+        else: return UserTable.getUserIdFromIdentityNo(identityNumber) is None
 

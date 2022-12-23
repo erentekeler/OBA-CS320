@@ -18,7 +18,7 @@ class UserRepository:
     def getUserPassword(self, identityNumber):
         query = "select Password from User where IdentityNumber = " + str(identityNumber)
         result = self.connector.executeQuery(query)
-        return result
+        return result[0]
 
     def createUser(self, firstName, lastName, password, identityNumber):
         query = f'INSERT INTO User (FirstName, LastName, Password, IdentityNumber) VALUES (\'{firstName}\', \'{lastName}\', \'{password}\', \'{identityNumber}\')'
@@ -32,7 +32,7 @@ class UserRepository:
     def getUserIdFromIdentityNo(self, identityNumber):
         query = f'select UserId from User where IdentityNumber = \'{identityNumber}\''
         result = self.connector.executeQuery(query)
-        return result[0]
+        return result
 
 
 userRepository = UserRepository()

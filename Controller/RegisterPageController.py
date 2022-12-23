@@ -25,7 +25,7 @@ class RegisterPageController(bc.BankingController):
             events, values = self.view.read()
             name = values['Name']
             surname = values['Surname']
-            tckn = values['givenID']
+            tckn = values['ID']
             password = values['Password']
             if events == "Create Account":
                 data=cus.Customer()
@@ -33,7 +33,7 @@ class RegisterPageController(bc.BankingController):
                     data.createUser(name, surname, password, tckn)
                     sg.popup('Success', 'You have created your account successfully')
                     break
-                elif(name or surname or tckn or password == ""):
+                elif(name == "" or surname == "" or tckn == "" or password == ""):
                     sg.popup('Missing Info','Please fill out everything!')
                 elif(data.registerCheck(tckn)==False):
                     sg.popup('Existing ID','This ID already registered. Please Try to login!')
