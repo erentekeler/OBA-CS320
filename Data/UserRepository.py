@@ -1,5 +1,6 @@
 from MySqlConnector import MySqlConnector
 
+
 class UserRepository:
 
     def __init__(self):
@@ -10,8 +11,13 @@ class UserRepository:
         result = self.connector.executeQuery(query)
         return result
 
+    def getUserPassword(self, identityNumber):
+        query = "select Password from User where IdentityNumber = " + str(identityNumber)
+        result = self.connector.executeQuery(query)
+        return result
+
     def createUser(self, firstName, lastName, password, identityNumber):
-        query =  f'INSERT INTO User (FirstName, LastName, Password, IdentityNumber) VALUES (\'{firstName}\', \'{lastName}\', \'{password}\', \'{identityNumber}\')'
+        query = f'INSERT INTO User (FirstName, LastName, Password, IdentityNumber) VALUES (\'{firstName}\', \'{lastName}\', \'{password}\', \'{identityNumber}\')'
         result = self.connector.executeQuery(query, True)
 
     def getLoginUser(self, identityNumber, password):
@@ -24,8 +30,9 @@ class UserRepository:
         result = self.connector.executeQuery(query)
         return result[0]
 
-userRepository = UserRepository()
-#userRepository.createUser("Selen","Selena","1234", "1239")
 
-#q = "DELETE FROM " + str("user") + " WHERE UserId= 5"
-#userRepository.connector.executeQuery(q,True)
+userRepository = UserRepository()
+# userRepository.createUser("Selen","Selena","1234", "1239")
+
+# q = "DELETE FROM " + str("user") + " WHERE UserId= 5"
+# userRepository.connector.executeQuery(q,True)

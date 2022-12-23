@@ -51,6 +51,7 @@ class AccountRepository:
     def updateBalance(self, amount, accountId):
         query = "UPDATE account SET Balance = " + str(amount) + " WHERE AccountId = " + str(accountId)
         result = self.connector.executeQuery(query, True)
+        return result
 
     def returnMultipleRowAsList(self, rows):
         lst = []
