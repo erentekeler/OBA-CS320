@@ -27,13 +27,13 @@ class NewAccountPageController():
             if(events=="Go Back"):
                 break
             elif(events=="CREATE ACCOUNT"):
-                
-                if(self.acc.createAccount(acc_name,acc_currency,self.customer)):
+                print(self.customer)
+                if(acc_name == '' or acc_currency == '' or self.acc.createAccount(acc_name,acc_currency,self.customer)==False):
+                    sg.popup('Failed', 'You need new account!')
+                    continue
+                elif (self.acc.createAccount(acc_name, acc_currency, self.customer)):
                     sg.popup('Success', 'You Have Successfully created new Account')
                     break
-                elif(acc_name =='' or self.acc.createAccount(acc_name,acc_currency,self.customer)==False):
-                    sg.popup('Failed', 'You need new account new!')
-                    continue
 
         self.view.close()
 

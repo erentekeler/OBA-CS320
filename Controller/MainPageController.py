@@ -23,6 +23,7 @@ class MainPageController(bc.BankingController):
         super().__init__()
         self.customer=customer
         self.view=self.getView(mainPage)
+        print(self.customer)
 
 
     def openPage(self):

@@ -26,5 +26,3 @@ class AccountsPageController():
 
 
 
-a = AccountsPageController()
-a.openPage()

@@ -30,6 +30,7 @@ class LoginPageController(bc.BankingController):
                 if(self.model.loginCheck(identitiy_num,user_password)):
                     self.view.close()
                     data=ur.UserRepository()
+                    print(data.getUserIdFromIdentityNo(identitiy_num))
                     main=mp.MainPageController(data.getUserIdFromIdentityNo(identitiy_num))
                     main.openPage()
                     break

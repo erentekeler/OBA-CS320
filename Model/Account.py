@@ -2,7 +2,7 @@ import sys
 import os
 os.path.normpath(os.getcwd() + os.sep + os.pardir)
 sys.path.insert(1,os.getcwd())
-from Data.AccountRepository import AccountRepository as acc
+from Data import AccountRepository as acc
 
 
 class Account:
@@ -11,8 +11,9 @@ class Account:
         pass
 
     def createAccount(self, accountName, currencyType, userId):
-        AccountTable = acc.createAccount()
+        AccountTable = acc.AccountRepository()
         return AccountTable.createAccount(accountName, currencyType, userId)
 
     def listAccounts(self, userId):
-        return accounts.getAccountsOfUser(accounts(), userId)
+        AccountTable = acc.AccountRepository()
+        return acc.getAccountsOfUser(userId)

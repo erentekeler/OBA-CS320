@@ -14,4 +14,3 @@ layout = [[sg.Text('Select the Account: ',size = (17, 1), font=('Arial',12,'bold
                        
 
 window = sg.Window('Account List Page - OBA', layout,input, size=(600,600),element_justification='c')    
-window.read()
