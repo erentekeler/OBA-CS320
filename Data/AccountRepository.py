@@ -31,6 +31,7 @@ class AccountRepository:
             result = tempResult
             if tempResult == query:
                 result = self.connector.executeQuery(query)
+                return True
             else:
                 return False
         else:
@@ -53,13 +54,14 @@ class AccountRepository:
         result = self.connector.executeQuery(query)
         return result
 
+    #ok
     def updateBalance(self, amount, accountId):
         query = "UPDATE account SET Balance = " + str(amount) + " WHERE AccountId = " + str(accountId)
         result = self.connector.executeQuery(query, True)
-        return result
 
+    #ok
     def getAccountBalanceFromAccountName(self, accountName, userId):
-        query = "select Balance from Account where AccountName = " + str(accountName) + "and UserId= " + str(userId)
+        query = "select Balance from Account where AccountName = " +  "\'" + str(accountName) + "\'" + " and UserId = " + str(userId)
         result = self.connector.executeQuery(query)
         return result
 
@@ -80,5 +82,5 @@ A = AccountRepository()
 # A.createAccount("Eren", "TL", "1234567890", 1)
 # A.updateBalance(350, "1234567890")
 b = A.getAccountNamesOfUser(4)[0]
-c = A.getAccountBalanceFromAccountName("TL hesabım" ,4)
+c = A.updateBalance(146, 1000000)
 print(c)
