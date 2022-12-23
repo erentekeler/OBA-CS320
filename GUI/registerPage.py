@@ -14,6 +14,4 @@ layout = [
         ]
                        
 
-window = sg.Window('Register Page - OBA', layout,input, size=(500,500),element_justification='c')    
-window.read()
-
+window = sg.Window('Register Page - OBA', layout,input, size=(500,500),element_justification='c')

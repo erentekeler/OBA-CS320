@@ -13,4 +13,3 @@ layout = [
 
 window = sg.Window('Ozyegin Banking Application - OBA', layout,input, size=(300,250),element_justification='c')    
 
-
