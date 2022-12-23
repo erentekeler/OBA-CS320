@@ -46,14 +46,19 @@ class AccountRepository:
         result = self.connector.fetch_as_all(query)
         return self.returnMultipleRowAsList(result)
 
-    def getAccountFromIBAN(self, accountId):
-        query = "select * from Account where AccountNumber = " + str(accountId)
+    def getAccountFromAccountId(self, accountId):
+        query = "select * from Account where AccountId = " + str(accountId)
         result = self.connector.executeQuery(query)
         return result
 
     def updateBalance(self, amount, accountId):
         query = "UPDATE account SET Balance = " + str(amount) + " WHERE AccountId = " + str(accountId)
         result = self.connector.executeQuery(query, True)
+        return result
+
+    def getAccountBalanceFromAccountName(self, accountName, userId):
+        query = "select Balance from Account where AccountName = " + str(accountName) + "and UserId= " + str(userId)
+        result = self.connector.executeQuery(query)
         return result
 
     def returnMultipleRowAsList(self, rows):
@@ -72,8 +77,6 @@ A = AccountRepository()
 # A.getAccountNamesOfUser(3)
 # A.createAccount("Eren", "TL", "1234567890", 1)
 # A.updateBalance(350, "1234567890")
-b = A.getAccountNamesOfUser(4)
-for i in b:
-    print(i)
-
-print(b)
+b = A.getAccountNamesOfUser(4)[0]
+c = A.getAccountBalanceFromAccountName("TL hesabım" ,4)
+print(c)
