@@ -41,6 +41,8 @@ class LoginPageController(bc.BankingController):
             elif(events == 'REGISTER'):    
                 register=rg.RegisterPageController()
                 register.openPage()
+                identitiy_num = ""
+                user_password = ""
                 continue
                 
         self.view.close()
