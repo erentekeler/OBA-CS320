@@ -65,6 +65,18 @@ class AccountRepository:
         result = self.connector.executeQuery(query)
         return result
 
+    def getAccountBalanceFromAccountName(self, accountName, userId):
+        query = "select Balance from Account where AccountName = " + "\'" + str(
+            accountName) + "\'" + " and UserId = " + str(userId)
+        result = self.connector.executeQuery(query)
+        return result
+
+    def getFullNameFromAccountId(self, accountId):
+        query = "select u.FirstName, u.LastName from account as a, user as u where u.UserId = a.UserId and a.AccountId = "+ str(accountId)
+        result = self.connector.executeQuery(query)
+        return result
+
+
     def returnMultipleRowAsList(self, rows):
         lst = []
         for row in rows:
@@ -84,3 +96,4 @@ A = AccountRepository()
 b = A.getAccountNamesOfUser(4)[0]
 c = A.updateBalance(146, 1000000)
 print(c)
+print(A.getFullNameFromAccountId(1000000))

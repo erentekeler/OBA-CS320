@@ -17,3 +17,9 @@ class Account:
     def listAccounts(self, userId):
         AccountTable = acc.AccountRepository()
         return acc.getAccountsOfUser(userId)
+
+    def getUserFullNameFromAccountId(self, accountId):
+        AccountTable = acc.AccountRepository()
+        temp = AccountTable.getFullNameFromAccountId(accountId)
+        if(temp is not None): return temp[0] + " " + temp[1]
+        else: return False
