@@ -3,6 +3,7 @@ import os
 os.path.normpath(os.getcwd() + os.sep + os.pardir)
 sys.path.insert(1, os.getcwd())
 from GUI import AccountList
+from Data import AccountRepository
 
 
 class AccountsPageController():
@@ -18,6 +19,7 @@ class AccountsPageController():
     def openPage(self):
         while True:
             events, values = self.view.read()
+
 
         self.view.close()
 
