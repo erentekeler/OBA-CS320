@@ -28,6 +28,6 @@ CREATE TABLE Transaction (
   Amount double NOT NULL,
   CurrencyType varchar(5) NOT NULL,
   PRIMARY KEY (TransactionId),
-  FOREIGN KEY (SenderAccountId) REFERENCES Account (AccoundId),
-  FOREIGN KEY (ReceiverAccountId) REFERENCES Account (AccoundId)
+  FOREIGN KEY (SenderAccountId) REFERENCES Account (AccountId),
+  FOREIGN KEY (ReceiverAccountId) REFERENCES Account (AccountId)
 );
