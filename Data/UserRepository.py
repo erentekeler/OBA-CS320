@@ -1,10 +1,14 @@
-from MySqlConnector import MySqlConnector
+import sys
+import os
+os.path.normpath(os.getcwd() + os.sep + os.pardir)
+sys.path.insert(1,os.getcwd())
+from Data import MySqlConnector as sql
 
 
 class UserRepository:
 
     def __init__(self):
-        self.connector = MySqlConnector()
+        self.connector = sql.MySqlConnector()
 
     def getUser(self, id):
         query = "select * from User where UserId = " + str(id)
