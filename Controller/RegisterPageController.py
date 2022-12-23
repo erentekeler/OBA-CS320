@@ -1,5 +1,6 @@
 import sys
 import os
+import PySimpleGUI as sg
 os.path.normpath(os.getcwd() + os.sep + os.pardir)
 sys.path.insert(1,os.getcwd())
 from GUI import registerPage
@@ -27,9 +28,15 @@ class RegisterPageController(bc.BankingController):
             tckn = values['givenID']
             password = values['Password']
             if events == "Create Account":
-                customer = cus.Customer()
-                if customer.registerCheck(tckn):
-                    customer.createUser(name, surname, password, tckn)
+                data=cus.Customer()
+                if(data.registerCheck(tckn)):
+                    data.createUser(name, surname, password, tckn)
+                    sg.popup('Success', 'You have created your account successfully')
+                    break
+                elif(name or surname or tckn or password == ""):
+                    sg.popup('Missing Info','Please fill out everything!')
+                elif(data.registerCheck(tckn)==False):
+                    sg.popup('Existing ID','This ID already registered. Please Try to login!')
             elif events == "SIGN IN":
                 break
 
