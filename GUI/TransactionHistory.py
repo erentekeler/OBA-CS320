@@ -9,12 +9,15 @@ temp_list5 = ["accountName5",'Currency5','Buy/Sell5','Amount5']
 
 layout = [
         [sg.Text('Account Name  |     Currency    |          BUY/SELL        |     Amount ',size = (100, 1), font=('Arial',12,'bold'))],
+        [sg.Text('',size = (13, 1), font=('Arial',12,'bold')),],
+
         [
         sg.Text(str(temp_list1[0]),size = (13, 1), font=('Arial',12,'bold')),
         sg.Text(str(temp_list1[1]),size = (12, 1), font=('Arial',12,'bold')),
         sg.Text(str(temp_list1[2]),size = (12, 1), font=('Arial',12,'bold')),
         sg.Text(str(temp_list1[3]),size = (13, 1), font=('Arial',12,'bold')),],
-         [
+
+        [
         sg.Text(str(temp_list2[0]),size = (13, 1), font=('Arial',12,'bold')),
         sg.Text(str(temp_list2[1]),size = (12, 1), font=('Arial',12,'bold')),
         sg.Text(str(temp_list2[2]),size = (12, 1), font=('Arial',12,'bold')),
@@ -34,10 +37,10 @@ layout = [
         sg.Text(str(temp_list5[1]),size = (12, 1), font=('Arial',12,'bold')),
         sg.Text(str(temp_list5[2]),size = (12, 1), font=('Arial',12,'bold')),
         sg.Text(str(temp_list5[3]),size = (13, 1), font=('Arial',12,'bold')),],
-        [sg.Button('SELL', size = (10, 1),font=("Arial",20,'bold'), pad=(200,25))]
+        [sg.Button('Go Back', size = (10, 1),font=("Arial",12,'bold'), pad=(200,10), button_color='Dark Grey')]
+
 
         ]
 
 window = sg.Window('Transaction History Page - OBA', layout,input, size=(600,600))
-window.read()
 

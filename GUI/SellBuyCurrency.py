@@ -17,4 +17,3 @@ layout = [
 
 window = sg.Window('Sell/Buyy Currency Page - OBA', layout,input, size=(800,500))
 
-
