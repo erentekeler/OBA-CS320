@@ -1,11 +1,14 @@
-from MySqlConnector import MySqlConnector
+import os, sys
+os.path.normpath(os.getcwd() + os.sep + os.pardir)
+sys.path.insert(1, os.getcwd())
+from Data import MySqlConnector as ml
 import numpy as np
 
 
 class AccountRepository:
 
     def __init__(self):
-        self.connector = MySqlConnector()
+        self.connector = ml.MySqlConnector()
 
     def getAccount(self, ID):
         query = "select * from Account where AccountId = " + str(ID)
@@ -60,12 +63,17 @@ class AccountRepository:
                 lst.append(data)
         return lst
 
-        #   def countNumberOfUserAccounts(self, userId):
-        query = "SELECT Count(*) FROM Account WHERE UserId = " + str(userId)
-        result = self.connector.executeQuery(query)[0]
-        return result
+    # def countNumberOfUserAccounts(self, userId):
+    #     query = "SELECT Count(*) FROM Account WHERE UserId = " + str(userId)
+    #     result = self.connector.executeQuery(query)[0]
+    #     return result
 
-# A = AccountRepository()
+A = AccountRepository()
 # A.getAccountNamesOfUser(3)
 # A.createAccount("Eren", "TL", "1234567890", 1)
 # A.updateBalance(350, "1234567890")
+b = A.getAccountNamesOfUser(4)
+for i in b:
+    print(i)
+
+print(b)
