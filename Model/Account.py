@@ -1,4 +1,8 @@
-from Data.AccountRepository import AccountRepository as accounts
+import sys
+import os
+os.path.normpath(os.getcwd() + os.sep + os.pardir)
+sys.path.insert(1,os.getcwd())
+from Data.AccountRepository import AccountRepository as acc
 
 
 class Account:
@@ -7,8 +11,8 @@ class Account:
         pass
 
     def createAccount(self, accountName, currencyType, userId):
-        AccountTable = accounts()
-        accounts.createAccount(AccountTable, accountName, currencyType, userId)
+        AccountTable = acc.createAccount()
+        return AccountTable.createAccount(accountName, currencyType, userId)
 
     def listAccounts(self, userId):
         return accounts.getAccountsOfUser(accounts(), userId)

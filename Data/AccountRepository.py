@@ -31,10 +31,12 @@ class AccountRepository:
             result = tempResult
             if tempResult == query:
                 result = self.connector.executeQuery(query)
+            else:
+                return False
         else:
             query = f'INSERT INTO Account (AccountName, CurrencyType, Balance, UserId) VALUES (\'{accountName}\', \'{currencyType}\', \'{0}\', \'{userId}\')'
             result = self.connector.executeQuery(query, True)
-        print(result)
+            return True
 
     def getAccountsOfUser(self, userId):
         query = "select * from Account where UserId = " + str(userId)
