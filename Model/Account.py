@@ -5,23 +5,8 @@ from Model.Transaction import Transaction
 
 class Account:
 
-    def __init__(self, accountName, currencyType):
-        self.balance = 0
-        self.accountName = accountName
-        self.currencyType = currencyType
-        self.transactionList = []
-
-        accountNumber = ""
-        IBAN = "TR44"
-
-        for i in range(8):
-            if i == 1:
-                digit = str(random.randint(1, 9))
-            else:
-                digit = str(random.randint(0, 9))
-            accountNumber = accountNumber + digit
-
-        self.accountNumber = accountNumber
+    def __init__(self):
+        pass
 
     def makeTransaction(self, toID, amount):
         fromID = self.accountNumber
