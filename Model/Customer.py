@@ -1,4 +1,8 @@
-from Data.UserRepository import UserRepository as users
+import sys
+import os
+os.path.normpath(os.getcwd() + os.sep + os.pardir)
+sys.path.insert(1,os.getcwd())
+from Data import UserRepository as users
 
 
 class Customer:
@@ -10,9 +14,10 @@ class Customer:
         users.createUser(users(), firstName, lastName, password, identityNumber)
 
     def loginCheck(self, identityNumber, password) -> bool:
-        UserTable = users()
-        return users.getUserIdFromIdentityNo(UserTable, identityNumber) is not None \
-            and password is users.getUserPassword(UserTable, identityNumber)[3]
+        UserTable = users.UserRepository()
+        if(identityNumber == "" or password == ""): return False
+        else: return UserTable.getUserIdFromIdentityNo(identityNumber) is not None and UserTable.getUserPassword(identityNumber) is not None and password == UserTable.getUserPassword(identityNumber)
+
 
     def registerCheck(self, identityNumber):
         UserTable = users()
