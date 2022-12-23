@@ -17,4 +17,4 @@ layout = [
                        
 
 window = sg.Window('Transfer Money Page - OBA', layout,input, size=(800,500))   
-
+window.read()
