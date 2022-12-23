@@ -65,9 +65,8 @@ class AccountRepository:
         result = self.connector.executeQuery(query)
         return result
 
-    def getAccountBalanceFromAccountName(self, accountName, userId):
-        query = "select Balance from Account where AccountName = " + "\'" + str(
-            accountName) + "\'" + " and UserId = " + str(userId)
+    def getAccountBalanceAccountId(self,accountId):
+        query = "select Balance from Account where AccountId = " + "\'" + str(accountId)  + "\'"
         result = self.connector.executeQuery(query)
         return result
 
