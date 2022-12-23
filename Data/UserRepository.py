@@ -14,11 +14,15 @@ class UserRepository:
         query =  f'INSERT INTO User (FirstName, LastName, Password, IdentityNumber) VALUES (\'{firstName}\', \'{lastName}\', \'{password}\', \'{identityNumber}\')'
         result = self.connector.executeQuery(query, True)
 
-
     def getLoginUser(self, identityNumber, password):
         query = f'select * from User where IdentityNumber = \'{identityNumber}\' AND Password = \'{password}\''
         result = self.connector.executeQuery(query)
         return result
+
+    def getUserIdFromIdentityNo(self, identityNumber):
+        query = f'select UserId from User where IdentityNumber = \'{identityNumber}\''
+        result = self.connector.executeQuery(query)
+        return result[0]
 
 userRepository = UserRepository()
 #userRepository.createUser("Selen","Selena","1234", "1239")

@@ -1,4 +1,3 @@
-
 CREATE TABLE User (
   UserId int NOT NULL AUTO_INCREMENT,
   FirstName varchar(255) NOT NULL,
@@ -13,13 +12,13 @@ CREATE TABLE Account (
   AccoundId int NOT NULL AUTO_INCREMENT,
   AccountName varchar(255) NOT NULL,
   CurrencyType varchar(5) NOT NULL,
-  AccountNumber char(10),
   Balance double NOT NULL DEFAULT '0',
   UserId int NOT NULL,
   PRIMARY KEY (AccoundId),
-  FOREIGN KEY (UserId) REFERENCES user (UserId),
-  UNIQUE (AccountNumber)
+  FOREIGN KEY (UserId) REFERENCES user (UserId)
 );
+
+alter table Account auto_increment=1000000;
 
 CREATE TABLE Transaction (
   TransactionId int NOT NULL AUTO_INCREMENT,
