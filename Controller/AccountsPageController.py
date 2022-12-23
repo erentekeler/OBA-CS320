@@ -2,18 +2,18 @@ import sys
 import os
 os.path.normpath(os.getcwd() + os.sep + os.pardir)
 sys.path.insert(1, os.getcwd())
-from GUI import CreateAccount
+from GUI import AccountList
 
 
-class NewAccountPageController():
+class AccountsPageController():
     def __init__(self) -> None:
         super().__init__()
         # self.model=self.getActionModel()
         # self.view=self.getView()
-        self.view = self.getView(CreateAccount)
+        self.view = self.getView(AccountList)
 
-    def getView(self, page):
-        return page.window
+    def getView(self, loginPage):
+        return loginPage.window
 
     def openPage(self):
         while True:
@@ -23,5 +23,5 @@ class NewAccountPageController():
 
 
 
-a = NewAccountPageController()
+a = AccountsPageController()
 a.openPage()

@@ -18,3 +18,17 @@ class MySqlConnector:
         finally:
             cursor.close()
             print("MySQL connection is closed")
+
+    def fetch_as_all(self, select_query):
+    #'''Execute a select query and return the outcome as a dict.'''
+        try:
+            cursor = self.connection.cursor()
+            cursor.execute(select_query)
+            rows = cursor.fetchall()
+            return rows
+        except:
+            msg = 'ERROR'
+            print(msg)
+        finally:
+            cursor.close()
+            print("MySQL connection is closed")
