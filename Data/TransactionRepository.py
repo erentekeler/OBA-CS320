@@ -7,7 +7,6 @@ class TransactionRepository:
     def __init__(self):
         self.connector = MySqlConnector()
 
-
     def getReceiverAccountTransactions(self, accountId):
         query = "select * from Transaction where ReceiverAccountId = " + str(accountId)
         result = self.connector.executeQuery(query)
@@ -18,7 +17,6 @@ class TransactionRepository:
         result = self.connector.executeQuery(query)
         return result
 
-    #balance account create edildiğinde 0 olduğu için 0 yazdım.
     def createTransaction(self, senderAccountId, receiverAccountId, amount):
         now = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
         currencyType = AccountRepository.getAccount(AccountRepository(), senderAccountId)[2]
