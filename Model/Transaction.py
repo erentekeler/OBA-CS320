@@ -8,15 +8,17 @@ class Transaction:
         pass
 
     def makeTransaction(self, fromID, toID, amount):
+        amount = float(amount.strip())
         TransactionTable = transactions()
         AccountTable = accounts()
-        senderType = accounts.getAccountFromIBAN(AccountTable, fromID)[2]
-        receiverType = accounts.getAccountFromIBAN(AccountTable, toID)[2]
+        senderType = accounts.getAccountFromAccountId(AccountTable, fromID)[2]
+        receiverType = accounts.getAccountFromAccountId(AccountTable, toID)[2]
         if senderType == receiverType:
             transactions.createTransaction(TransactionTable, fromID, toID, amount)
-            return True
-        else:
-            return False
+            currBalanceSender = float(accounts.getAccountBalanceAccountId(accounts(), fromID))
+            currBalanceReceiver = float(accounts.getAccountBalanceAccountId(accounts(), toID))
+            accounts.updateBalance(AccountTable, currBalanceSender - amount, fromID)
+            accounts.updateBalance(AccountTable, currBalanceReceiver + amount, toID)
 
     def filterTransactionsByType(self, accountId, keyword):
         TransactionTable = transactions()
