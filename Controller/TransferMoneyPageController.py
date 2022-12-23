@@ -13,6 +13,7 @@ class TransferMoneyPageController():
         # self.view=self.getView()
         self.view = self.getView(transferMoneyPage)
         self.ab = ac.AccountRepository()
+        # self.userId = userId
 
 
 
@@ -24,8 +25,10 @@ class TransferMoneyPageController():
 
         while True:
             events, values = self.view.read()
-            if(events=="Refresh Accounts List"):
-                #self.view['AccNames'].update(value=[1], values=[2])
+            if(events =="Refresh Accounts List"):
+                self.view['AccNames'].update(value='', values= self.ab.getAccountNamesOfUser(4))
+            if (events == 'AccNames'):
+                self.view['maxAmount'].update('The Maximum amount can be send:  '+str(self.ab.getAccountBalancebyAccountName(values['AccNames'])))
         self.view.close()
 
 

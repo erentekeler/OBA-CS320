@@ -32,6 +32,11 @@ class UserRepository:
     def getUserIdFromIdentityNo(self, identityNumber):
         query = f'select UserId from User where IdentityNumber = \'{identityNumber}\''
         result = self.connector.executeQuery(query)
+        return result[0]
+
+    def getUserIdFromIdentityNoV2(self, identityNumber):
+        query = f'select UserId from User where IdentityNumber = \'{identityNumber}\''
+        result = self.connector.executeQuery(query)
         return result
 
 

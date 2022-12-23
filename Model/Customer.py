@@ -17,11 +17,11 @@ class Customer:
     def loginCheck(self, identityNumber, password) -> bool:
         UserTable = users.UserRepository()
         if(identityNumber == "" or password == ""): return False
-        else: return UserTable.getUserIdFromIdentityNo(identityNumber) is not None and UserTable.getUserPassword(identityNumber) is not None and password == UserTable.getUserPassword(identityNumber)
+        else: return UserTable.getUserIdFromIdentityNoV2(identityNumber) is not None and UserTable.getUserPassword(identityNumber) is not None and password == UserTable.getUserPassword(identityNumber)
 
 
     def registerCheck(self, identityNumber):
         UserTable = users.UserRepository()
         if (identityNumber == ""): return False
-        else: return UserTable.getUserIdFromIdentityNo(identityNumber) is None
+        else: return UserTable.getUserIdFromIdentityNoV2(identityNumber) is None
 
