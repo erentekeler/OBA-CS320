@@ -7,13 +7,13 @@ import Controller
 from Controller import MainPageController as mp
 from Controller import BankingController as bc
 from Controller import RegisterPageController as rg
+from Model import Customer as cus
 
 
 class LoginPageController(bc.BankingController):
     def __init__(self) -> None:
         super().__init__()
         #self.model=self.getActionModel()
-        #self.view=self.getView()
         self.view=self.getView(loginPage)
         
 
@@ -25,9 +25,11 @@ class LoginPageController(bc.BankingController):
             user_password = values['Password']
 
             if(events == 'LOGIN'):
-                #model
+                #model returns customer
                 self.view.close()
-                main=mp.MainPageController()
+                #temporary new customer
+                a=cus.Customer("temp","temp","123","1234",[])
+                main=mp.MainPageController(cus)
                 main.openPage()
                 break
             elif(events == 'REGISTER'):    
