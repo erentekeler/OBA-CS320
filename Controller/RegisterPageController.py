@@ -25,7 +25,7 @@ class RegisterPageController(bc.BankingController):
             name=values['Name']
             surname=values['Surname']
             tckn=values['givenID']
-            password=values['password']
+            password=values['Password']
             accounts=[]
             if(events=="Create Account"):
                 customer=cus.Customer(name,surname,tckn,password,accounts)

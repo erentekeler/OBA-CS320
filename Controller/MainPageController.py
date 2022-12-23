@@ -18,8 +18,9 @@ class MainPageController(bc.BankingController):
     def getView(self,mainPage):
         return mainPage.window
     
-    def __init__(self) -> None:
+    def __init__(self,customer):
         super().__init__()
+        self.customer=customer
         #self.model=self.getActionModel()
         self.view=self.getView(mainPage)
 
