@@ -21,7 +21,3 @@ class BuySellCurrencyPageController():
 
         self.view.close()
 
-
-
-a = BuySellCurrencyPageController()
-a.openPage()

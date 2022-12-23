@@ -31,10 +31,13 @@ class AccountRepository:
             result = tempResult
             if tempResult == query:
                 result = self.connector.executeQuery(query)
+                return True
+            else:
+                return False
         else:
             query = f'INSERT INTO Account (AccountName, CurrencyType, Balance, UserId) VALUES (\'{accountName}\', \'{currencyType}\', \'{0}\', \'{userId}\')'
             result = self.connector.executeQuery(query, True)
-        print(result)
+            return True
 
     def getAccountsOfUser(self, userId):
         query = "select * from Account where UserId = " + str(userId)
@@ -51,15 +54,28 @@ class AccountRepository:
         result = self.connector.executeQuery(query)
         return result
 
+    #ok
     def updateBalance(self, amount, accountId):
         query = "UPDATE account SET Balance = " + str(amount) + " WHERE AccountId = " + str(accountId)
         result = self.connector.executeQuery(query, True)
+
+    #ok
+    def getAccountBalanceFromAccountName(self, accountName, userId):
+        query = "select Balance from Account where AccountName = " +  "\'" + str(accountName) + "\'" + " and UserId = " + str(userId)
+        result = self.connector.executeQuery(query)
         return result
 
     def getAccountBalanceFromAccountName(self, accountName, userId):
-        query = "select Balance from Account where AccountName = " + str(accountName) + "and UserId= " + str(userId)
+        query = "select Balance from Account where AccountName = " + "\'" + str(
+            accountName) + "\'" + " and UserId = " + str(userId)
         result = self.connector.executeQuery(query)
         return result
+
+    def getFullNameFromAccountId(self, accountId):
+        query = "select u.FirstName, u.LastName from account as a, user as u where u.UserId = a.UserId and a.AccountId = "+ str(accountId)
+        result = self.connector.executeQuery(query)
+        return result
+
 
     def returnMultipleRowAsList(self, rows):
         lst = []
@@ -78,5 +94,6 @@ A = AccountRepository()
 # A.createAccount("Eren", "TL", "1234567890", 1)
 # A.updateBalance(350, "1234567890")
 b = A.getAccountNamesOfUser(4)[0]
-c = A.getAccountBalanceFromAccountName("TL hesabım" ,4)
+c = A.updateBalance(146, 1000000)
 print(c)
+print(A.getFullNameFromAccountId(1000000))

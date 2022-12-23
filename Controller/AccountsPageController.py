@@ -7,11 +7,12 @@ from Data import AccountRepository
 
 
 class AccountsPageController():
-    def __init__(self) -> None:
+    def __init__(self,customer) -> None:
         super().__init__()
         # self.model=self.getActionModel()
         # self.view=self.getView()
         self.view = self.getView(AccountList)
+        self.customer=customer
 
     def getView(self, loginPage):
         return loginPage.window
@@ -25,5 +26,3 @@ class AccountsPageController():
 
 
 
-a = AccountsPageController()
-a.openPage()
