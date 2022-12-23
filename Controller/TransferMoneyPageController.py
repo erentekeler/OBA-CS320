@@ -4,6 +4,7 @@ os.path.normpath(os.getcwd() + os.sep + os.pardir)
 sys.path.insert(1, os.getcwd())
 from Data import AccountRepository as ac
 from GUI import transferMoneyPage
+import PySimpleGUI as sg
 
 
 class TransferMoneyPageController():
@@ -27,11 +28,10 @@ class TransferMoneyPageController():
             events, values = self.view.read()
             if(events =="Refresh Accounts List"):
                 self.view['AccNames'].update(value='', values= self.ab.getAccountNamesOfUser(4))
-            if (events == 'AccNames'):
-                self.view['maxAmount'].update('The Maximum amount can be send:  '+str(self.ab.getAccountBalancebyAccountName(values['AccNames'])))
+            if(events == "AccNames"):
+                self.view['Balance'].update('Account Balance:  '+str(self.ab.getAccountBalanceFromAccountName(values['AccNames'],4)[0]))
         self.view.close()
 
 
-
-a = TransferMoneyPageController()
-a.openPage()
+Tf = TransferMoneyPageController()
+Tf.openPage()
