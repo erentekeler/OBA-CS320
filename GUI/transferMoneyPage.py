@@ -12,8 +12,10 @@ layout = [
         #[sg.Text('Select the Account to Send Money to: ',size = (30, 1), font=('Arial',12,'bold')), sg.Combo(temp_list2, size = 40)],
         [sg.Text('Amount to be Sent: ',size = (21, 1), font=('Arial',12,'bold')), sg.InputText(key='amount', size=(12,1)),sg.Text('',size = (8, 1), font=('Arial',12,'bold')),sg.Text('Receiver\'s Name : '+receiverName,size = (30, 1), font=('Arial',12,'bold'))],
         [sg.Button('TRANSFER', size = (10, 1),font=("Arial",20,'bold'), pad=(25,25), button_color='Dark Green')],
-        [sg.Button('Go Back', size = (10, 1),font=("Arial",12,'bold'), pad=(25,25), button_color='Dark Grey')]
-       
+        [sg.Button('Go Back', size = (10, 1),font=("Arial",12,'bold'), pad=(25,25), button_color='Dark Grey')],
+        [sg.Button('Refresh Accounts List', size = (30, 1),font=("Arial",12,'bold'), pad=(25,25), button_color='Dark Grey')]
+
+        
         ]
                        
 

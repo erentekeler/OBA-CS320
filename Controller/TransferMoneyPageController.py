@@ -24,7 +24,8 @@ class TransferMoneyPageController():
 
         while True:
             events, values = self.view.read()
-            self.view['AccNames'].set(self.ab.getAccountNamesOfUser(4))
+            if(events=="Refresh Accounts List"):
+                #self.view['AccNames'].update(value=[1], values=[2])
         self.view.close()
 
 
