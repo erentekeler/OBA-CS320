@@ -1,6 +1,4 @@
-import random
 from Data.AccountRepository import AccountRepository as accounts
-from Model.Transaction import Transaction
 
 
 class Account:

@@ -1,4 +1,5 @@
 from Data.TransactionRepository import TransactionRepository as transactions
+from Data.AccountRepository import AccountRepository as accounts
 
 
 class Transaction:
@@ -8,7 +9,14 @@ class Transaction:
 
     def makeTransaction(self, fromID, toID, amount):
         TransactionTable = transactions()
-        transactions.createTransaction(TransactionTable, fromID, toID, amount)
+        AccountTable = accounts()
+        senderType = accounts.getAccountFromIBAN(AccountTable, fromID)[2]
+        receiverType = accounts.getAccountFromIBAN(AccountTable, toID)[2]
+        if senderType == receiverType:
+            transactions.createTransaction(TransactionTable, fromID, toID, amount)
+            return True
+        else:
+            return False
 
     def filterTransactionsByType(self, accountId, keyword):
         TransactionTable = transactions()
