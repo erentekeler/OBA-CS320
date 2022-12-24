@@ -11,8 +11,9 @@ def createWindow():
 
         layout = [
                 [sg.Image(logo)],
+                [sg.Text('Filter: ',size = (13, 1), font=('Arial',12,'bold')),sg.Radio('Recieved',"history"),sg.Radio('Sent', "history")],
                 [sg.Text('Account Name  |     Currency    |          BUY/SELL        |     Amount ',size = (100, 1), font=('Arial',12,'bold'))],
-                [sg.Text('',size = (13, 1), font=('Arial',12,'bold')),],
+                [sg.Text('',size = (13, 1), font=('Arial',12,'bold'))],
 
                 [
                 sg.Text(str(temp_list1[0]),size = (13, 1), font=('Arial',12,'bold')),
@@ -43,8 +44,8 @@ def createWindow():
                 [sg.Button('Go Back', size = (10, 1),font=("Arial",12,'bold'), pad=(200,10), button_color='Dark Grey')]
 
 
-                ]
-
+                ]  
+                 
         window = sg.Window('Transaction History Page - OBA', layout,input, size=(600,600))
         return window
 
