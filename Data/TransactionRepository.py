@@ -26,5 +26,14 @@ class TransactionRepository:
         now = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
         query = f'INSERT INTO Transaction (SenderAccountId, ReceiverAccountId, TransactionDate, Amount, CurrencyType)' \
                 f' VALUES (\'{senderAccountId}\', \'{receiverAccountId}\', \'{now}\', \'{amount}\', \'{currencyType}\')'
-        print("laaaaan")
         result = self.connector.executeQuery(query, True)
+
+    def getReceivedTransactions(self, userId):
+        query = "select a.accountName, t.Amount, t.CurrencyType, t.TransactionDate from Account as a, transaction as t where a.UserId = " + str(userId) + " and t.ReceiverAccountId = a.AccountId";
+        result = self.connector.fetch_as_all(query)
+        return result
+
+    def getSentTransactions(self, userId):
+        query = "select a.accountName, t.Amount, t.CurrencyType, t.TransactionDate from Account as a, transaction as t where a.UserId = " + str(userId) + " and t.SenderAccountId = a.AccountId"
+        result = self.connector.fetch_as_all(query)
+        return result
