@@ -65,8 +65,19 @@ class AccountRepository:
         result = self.connector.executeQuery(query)
         return result
 
+    def getCurrencyFromAccountName(self, accountName, userId):
+        query = "select CurrencyType from Account where AccountName = " +  "\'" + str(accountName) + "\'" + " and UserId = " + str(userId)
+        result = self.connector.executeQuery(query)
+        return result
+
+
     def getAccountBalanceAccountId(self,accountId):
-        query = "select Balance from Account where AccountId = " + "\'" + str(accountId)  + "\'"
+        query = "select Balance from Account where AccountId = " + str(accountId)
+        result = self.connector.executeQuery(query)
+        return result
+
+    def getAccountIdFromAccountName(self,accountName, userId):
+        query = "select AccountId from Account where AccountName = " + "\'" + str(accountName) + "\'" + " and UserId = " + str(userId)
         result = self.connector.executeQuery(query)
         return result
 
@@ -92,7 +103,3 @@ A = AccountRepository()
 # A.getAccountNamesOfUser(3)
 # A.createAccount("Eren", "TL", "1234567890", 1)
 # A.updateBalance(350, "1234567890")
-b = A.getAccountNamesOfUser(4)[0]
-c = A.updateBalance(146, 1000000)
-print(c)
-print(A.getFullNameFromAccountId(1000000))

@@ -33,25 +33,27 @@ class TransferMoneyPageController():
         while True:
             events, values = self.view.read()
             if(events =="Refresh Accounts List"):
-                self.view['AccNames'].update(value='', values= self.ab.getAccountNamesOfUser(4))
-            if(events == "AccNames"):
-                self.view['Balance'].update('Account Balance:  '+str(self.ab.getAccountBalanceFromAccountName(values['AccNames'],4)[0]))
-            if(events==['Verify']):
-                if(self.acc.findUser(values['recieverID'])):
-                    self.view['reciever'].update('Receiver\'s Name : '+str(self.acc.findUser(values['recieverID'])))
-                elif(self.acc.findUser(values['recieverID'])==False):
+                self.view['AccNames'].update(value='', values= self.ab.getAccountNamesOfUser(self.customer))
+            elif(events == "AccNames"):
+                self.view['Balance'].update('Account Balance:  '+str(self.ab.getAccountBalanceFromAccountName(values['AccNames'],self.customer)[0]))
+            elif(events == 'Verify'):
+                if(self.acc.getUserFullNameFromAccountId(values['receiverID'])):
+                    self.view['reciever'].update('Receiver\'s Name : '+str(self.acc.getUserFullNameFromAccountId(values['receiverID'])))
+                elif(self.acc.getUserFullNameFromAccountId(values['receiverID'])==False):
                     sg.popup('Fail','There is no matching account ID')
-            if(events=='TRANSFER'):
-                if(self.acc.findUser(values['recieverID'])==False):
+            elif(events=='TRANSFER'):
+                if(self.acc.getUserFullNameFromAccountId(values['receiverID'])==False):
                     sg.popup('Transfer Failed','There is no matching account ID')
-                elif(float(values['amount'])<=self.ab.getAccountBalanceFromAccountName(values['AccNames'],4)[0]):
-                    self.transaction.makeTransaction(self.customer,values['recieverID'],values['amount'])
-                elif(float(values['amount']>self.ab.getAccountBalanceFromAccountName(values['AccNames'],4)[0])):
+                    print("1")
+                elif(float(values['amount'])<=self.ab.getAccountBalanceFromAccountName(values['AccNames'],self.customer)[0]):
+                    self.transaction.makeTransaction(values["AccNames"],self.customer,values['receiverID'],values['amount'])
+                    print("2")
+                elif(float(values['amount']>self.ab.getAccountBalanceFromAccountName(values['AccNames'],self.customer)[0])):
                     sg.popup('Transfer Fail', 'You don\'t have enough money')
-            if(events=='Go Back'):
+                    print("3")
+            elif(events=='Go Back'):
                 break
         self.view.close()
 
 
-Tf = TransferMoneyPageController()
-Tf.openPage()
+
