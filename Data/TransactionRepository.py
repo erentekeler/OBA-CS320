@@ -1,11 +1,16 @@
-from MySqlConnector import MySqlConnector
+import sys
+import os
+os.path.normpath(os.getcwd() + os.sep + os.pardir)
+sys.path.insert(1, os.getcwd())
+from Data import MySqlConnector as ml
 from datetime import datetime
-from AccountRepository import AccountRepository
+from Data import AccountRepository as ar
 
 class TransactionRepository:
 
     def __init__(self):
-        self.connector = MySqlConnector()
+        self.connector = ml.MySqlConnector()
+        self.AR = ar.AccountRepository()
 
     def getReceiverAccountTransactions(self, accountId):
         query = "select * from Transaction where ReceiverAccountId = " + str(accountId)
@@ -17,11 +22,10 @@ class TransactionRepository:
         result = self.connector.executeQuery(query)
         return result
 
-    def createTransaction(self, senderAccountId, receiverAccountId, amount):
+    def createTransaction(self, senderAccountId, receiverAccountId, amount, currencyType):
         now = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
-        currencyType = AccountRepository.getAccount(AccountRepository(), senderAccountId)[2]
         query = f'INSERT INTO Transaction (SenderAccountId, RecieverAccountId, TransactionDate, Amount, CurrencyType)' \
                 f' VALUES (\'{senderAccountId}\', \'{receiverAccountId}\', \'{now}\', \'{amount}\', \'{currencyType}\')'
-        print(query)
+        print("laaaaan")
         result = self.connector.executeQuery(query, True)
         print(result)

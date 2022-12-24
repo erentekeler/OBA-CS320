@@ -7,7 +7,7 @@ logo = b'iVBORw0KGgoAAAANSUhEUgAAAGQAAAAbCAYAAACKlipAAAAAAXNSR0IArs4c6QAAAARnQU1
 
 layout = [
         [sg.Image(logo)],
-        [sg.Text('Select the Sender Account : ',size = (21, 1), font=('Arial',12,'bold')), sg.Combo(values = [], key = "AccNames" ,enable_events=True, size = 10),sg.Text('',size = (8,1), font=('Arial',12,'bold')),sg.Text('Enter the Receiver Account ID: ',size = (24, 1), font=('Arial',12,'bold')), sg.InputText(key='receiverID', size=(12,1))],
+        [sg.Text('Select the Sender Account : ',size = (21, 1), font=('Arial',12,'bold')), sg.Combo(values = [], key = "AccNames" ,enable_events=True, size = 10),sg.Text('',size = (8,1), font=('Arial',12,'bold')),sg.Text('Enter the Receiver Account ID: ',size = (24, 1), font=('Arial',12,'bold')), sg.InputText('', size=(12,1), key='receiverID')],
 
 
         [sg.Text('Account Balance:  '+str(maximumAmount), key='Balance',size = (50, 1), font=('Arial',12,'bold')),sg.Button('Verify', size = (10, 1),font=("Arial",12,'bold'), pad=(25,1), button_color='Dark Green')],

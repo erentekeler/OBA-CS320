@@ -13,16 +13,19 @@ class Transaction:
         self.AccountTable = ac.AccountRepository()
         pass
 
-    def makeTransaction(self, fromID, toID, amount):
+    def makeTransaction(self, accountName, userId, toAccountID, amount):
         amount = float(amount.strip())
-        senderType = self.AccountTable.getAccountFromAccountId(fromID)[2]
-        receiverType = self.AccountTable.getAccountFromAccountId(toID)[2]
+        senderType = self.AccountTable.getCurrencyFromAccountName(accountName, userId)[0]
+        receiverType = self.AccountTable.getAccountFromAccountId(toAccountID)[2]
         if senderType == receiverType:
-            self.TransactionTable.createTransaction(fromID, toID, amount)
-            currBalanceSender = float(self.AccountTable.getAccountBalanceAccountId(fromID))
-            currBalanceReceiver = float(self.AccountTable.getAccountBalanceAccountId(toID))
-            self.AccountTable.updateBalance(currBalanceSender - amount, fromID)
-            self.AccountTable.updateBalance(currBalanceReceiver + amount, toID)
+            fromAccountId = self.AccountTable.getAccountIdFromAccountName(accountName, userId)[0]
+            self.TransactionTable.createTransaction(fromAccountId, toAccountID, amount, receiverType)
+            currBalanceSender = float(self.AccountTable.getAccountBalanceAccountId(fromAccountId)[0])
+            currBalanceReceiver = float(self.AccountTable.getAccountBalanceAccountId(toAccountID)[0])
+            self.AccountTable.updateBalance(currBalanceSender - amount, fromAccountId)
+            self.AccountTable.updateBalance(currBalanceReceiver + amount, toAccountID)
+            return True
+        else: return False
 
     def filterTransactionsByType(self, accountId, keyword):
 
