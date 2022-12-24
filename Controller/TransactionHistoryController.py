@@ -37,7 +37,6 @@ class TransactionHistoryController():
                     view[keylist1[2]+str(i)].update(str(sentTransaction[i-1][2]))
                     view[keylist1[3]+str(i)].update(str(sentTransaction[i-1][3]))
                 continue
-
-            
-
+            elif(events=='Go Back'):
+                break
         view.close()
