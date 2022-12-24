@@ -22,6 +22,9 @@ class Customer:
 
     def registerCheck(self, identityNumber):
         UserTable = users.UserRepository()
+        print(len(str(identityNumber)))
         if (identityNumber == ""): return False
+        elif(len(str(identityNumber)) != 11):return str(7)
+        elif(UserTable.getUserIdFromIdentityNoV2(identityNumber) is not None): return str(8)
         else: return UserTable.getUserIdFromIdentityNoV2(identityNumber) is None
 
