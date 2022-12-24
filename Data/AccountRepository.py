@@ -86,6 +86,11 @@ class AccountRepository:
         result = self.connector.executeQuery(query)
         return result
 
+    def getAccountNameFromCurrencyType(self, userId, currencyType):
+        query = "select AccountName from account as a where userID = " + str(userId) + " and currencyType= " + "\'" + str(currencyType) + "\'"
+        result = self.connector.executeQuery(query)
+        return result[0]
+
 
     def returnMultipleRowAsList(self, rows):
         lst = []
@@ -93,6 +98,8 @@ class AccountRepository:
             for data in row:
                 lst.append(data)
         return lst
+
+
 
     # def countNumberOfUserAccounts(self, userId):
     #     query = "SELECT Count(*) FROM Account WHERE UserId = " + str(userId)
