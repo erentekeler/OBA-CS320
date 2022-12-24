@@ -24,8 +24,7 @@ class TransactionRepository:
 
     def createTransaction(self, senderAccountId, receiverAccountId, amount, currencyType):
         now = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
-        query = f'INSERT INTO Transaction (SenderAccountId, RecieverAccountId, TransactionDate, Amount, CurrencyType)' \
+        query = f'INSERT INTO Transaction (SenderAccountId, ReceiverAccountId, TransactionDate, Amount, CurrencyType)' \
                 f' VALUES (\'{senderAccountId}\', \'{receiverAccountId}\', \'{now}\', \'{amount}\', \'{currencyType}\')'
         print("laaaaan")
         result = self.connector.executeQuery(query, True)
-        print(result)
