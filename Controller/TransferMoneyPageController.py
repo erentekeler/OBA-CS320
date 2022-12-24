@@ -44,13 +44,12 @@ class TransferMoneyPageController():
             elif(events=='TRANSFER'):
                 if(self.acc.getUserFullNameFromAccountId(values['receiverID'])==False):
                     sg.popup('Transfer Failed','There is no matching account ID')
-                    print("1")
                 elif(float(values['amount'])<=self.ab.getAccountBalanceFromAccountName(values['AccNames'],self.customer)[0]):
                     self.transaction.makeTransaction(values["AccNames"],self.customer,values['receiverID'],values['amount'])
-                    print("2")
+                    sg.popup('Transfer Succsessful','Thank you for choosing OZUBANK')
                 elif(float(values['amount']>self.ab.getAccountBalanceFromAccountName(values['AccNames'],self.customer)[0])):
                     sg.popup('Transfer Fail', 'You don\'t have enough money')
-                    print("3")
+
             elif(events=='Go Back'):
                 break
         self.view.close()
