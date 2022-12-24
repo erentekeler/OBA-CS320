@@ -11,24 +11,25 @@ class AccountsPageController():
         super().__init__()
         # self.model=self.getActionModel()
         # self.view=self.getView()
-        self.view = self.getView(AccountList)
         self.customer=customer
         self.ab=ac.AccountRepository()
 
     def getView(self, loginPage):
-        return loginPage.window
+        pass
 
     def openPage(self):
+        view=AccountList.createWindow()
         while True:
-            events, values = self.view.read()
+            events, values =view.read()
             if(events=='Go Back'):
                 break
             elif(events=='Refresh Accounts'):
-                self.view['AccNames'].update(value='', values= self.ab.getAccountNamesOfUser(self.customer))
+                view['AccNames'].update(value='', values= self.ab.getAccountNamesOfUser(self.customer))
             elif(events=='AccNames'):
-                self.view['Balance'].update('Balance:  '+str(self.ab.getAccountBalanceFromAccountName(values['AccNames'],self.customer)[0]))
-                self.view['currency'].update('Currency Type: '+str(self.ab.getAccountBalanceAccountId()))
-        self.view.close()
+                view['Balance'].update('Balance:  '+str(self.ab.getAccountBalanceFromAccountName(values['AccNames'],self.customer)[0]))
+                view['currency'].update('Currency Type: '+str(self.ab.getCurrencyFromAccountName(values['AccNames'],self.customer)[0]))
+                view['accID'].update('Account ID: '+str(self.ab.getAccountIdFromAccountName(values['AccNames'],self.customer[0])))
+        view.close()
 
 
 

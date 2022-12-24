@@ -12,16 +12,16 @@ class NewAccountPageController():
         super().__init__()
         # self.model=self.getActionModel()
         # self.view=self.getView()
-        self.view = self.getView(CreateAccount)
         self.customer = customer
         self.acc=AC.Account()
 
     def getView(self, page):
-        return page.window
+        pass
 
     def openPage(self):
+        view=CreateAccount.createWindow()
         while True:
-            events, values = self.view.read()
+            events, values = view.read()
             acc_name=values['accountName']
             acc_currency=values['currency']
             if(events=="Go Back"):
@@ -35,5 +35,5 @@ class NewAccountPageController():
                     sg.popup('Success', 'You Have Successfully created new Account')
                     break
 
-        self.view.close()
+        view.close()
 

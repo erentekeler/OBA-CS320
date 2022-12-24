@@ -10,14 +10,16 @@ class BuySellCurrencyPageController():
         super().__init__()
         # self.model=self.getActionModel()
         # self.view=self.getView()
-        self.view = self.getView(SellBuyCurrency)
+        
 
     def getView(self, page):
-        return page.window
+        pass
 
     def openPage(self):
+        view = SellBuyCurrency.createWindow()
         while True:
-            events, values = self.view.read()
+            
+            events, values = view.read()
 
-        self.view.close()
+        view.close()
 

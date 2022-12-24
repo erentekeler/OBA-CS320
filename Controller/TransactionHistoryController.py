@@ -17,7 +17,9 @@ class TransactionHistoryController():
         return tranpage.window
     
     def openPage(self):
+        view= TransactionHistory.createWindow()
         while True:
-            events, values = self.view.read()
+            
+            events, values = view.read()
 
-        self.view.close()
+        view.close()

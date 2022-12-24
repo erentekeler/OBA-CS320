@@ -16,18 +16,19 @@ class LoginPageController(bc.BankingController):
     def __init__(self) -> None:
         super().__init__()
         self.model=self.getActionModel(cus)
-        self.view=self.getView(loginPage)
+        
         
 
     def openPage(self):
+        view=loginPage.createWindow()
         while True:
-            events, values = self.view.read()   
+            events, values = view.read()   
 
             if(events == 'LOGIN'):
                 identitiy_num = values['ID']
                 user_password = values['Password']
                 if(self.model.loginCheck(identitiy_num,user_password)):
-                    self.view.close()
+                    view.close()
                     data=ur.UserRepository()
                     print(data.getUserIdFromIdentityNo(identitiy_num))
                     main=mp.MainPageController(data.getUserIdFromIdentityNo(identitiy_num))
@@ -45,13 +46,13 @@ class LoginPageController(bc.BankingController):
                 user_password = ""
                 continue
                 
-        self.view.close()
+        view.close()
         
 
     def getActionModel(self,model):
         return cus.Customer()
     def getView(self,loginPage):
-        return loginPage.window
+        pass
 
 
 

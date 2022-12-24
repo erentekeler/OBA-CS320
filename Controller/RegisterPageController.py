@@ -16,17 +16,20 @@ class RegisterPageController(bc.BankingController):
     def __init__(self) -> None:
         super().__init__()
         # self.model=self.getActionModel(registerPage)
-        self.view = self.getView(registerPage)
+        
 
     def getActionModel(self):
         pass
 
     def getView(self, registerPage):
-        return registerPage.window
+        pass
 
     def openPage(self):
+       
+        view=registerPage.createWindow()
+       
         while True:
-            events, values = self.view.read()
+            events, values = view.read()
 
             if events == "Create Account":
                 data = cus.Customer()
@@ -48,4 +51,4 @@ class RegisterPageController(bc.BankingController):
                 tckn = ""
                 break
 
-        self.view.close()
+        view.close()
