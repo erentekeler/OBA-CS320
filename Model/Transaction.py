@@ -1,38 +1,40 @@
-from Data.TransactionRepository import TransactionRepository as transactions
-from Data.AccountRepository import AccountRepository as accounts
+import sys
+import os
+os.path.normpath(os.getcwd() + os.sep + os.pardir)
+sys.path.insert(1, os.getcwd())
+from Data import TransactionRepository as tr
+from Data import AccountRepository as ac
 
 
 class Transaction:
 
     def __init__(self):
+        self.TransactionTable = tr.TransactionRepository()
+        self.AccountTable = ac.AccountRepository()
         pass
 
     def makeTransaction(self, fromID, toID, amount):
         amount = float(amount.strip())
-        TransactionTable = transactions()
-        AccountTable = accounts()
-        senderType = accounts.getAccountFromAccountId(AccountTable, fromID)[2]
-        receiverType = accounts.getAccountFromAccountId(AccountTable, toID)[2]
+        senderType = self.AccountTable.getAccountFromAccountId(fromID)[2]
+        receiverType = self.AccountTable.getAccountFromAccountId(toID)[2]
         if senderType == receiverType:
-            transactions.createTransaction(TransactionTable, fromID, toID, amount)
-            currBalanceSender = float(accounts.getAccountBalanceAccountId(accounts(), fromID))
-            currBalanceReceiver = float(accounts.getAccountBalanceAccountId(accounts(), toID))
-            accounts.updateBalance(AccountTable, currBalanceSender - amount, fromID)
-            accounts.updateBalance(AccountTable, currBalanceReceiver + amount, toID)
+            self.TransactionTable.createTransaction(fromID, toID, amount)
+            currBalanceSender = float(self.AccountTable.getAccountBalanceAccountId(fromID))
+            currBalanceReceiver = float(self.AccountTable.getAccountBalanceAccountId(toID))
+            self.AccountTable.updateBalance(currBalanceSender - amount, fromID)
+            self.AccountTable.updateBalance(currBalanceReceiver + amount, toID)
 
     def filterTransactionsByType(self, accountId, keyword):
-        TransactionTable = transactions()
 
         if keyword == "Received":
-            return transactions.getReceiverAccountTransactions(TransactionTable, accountId)
+            return self.TransactionTable.getReceiverAccountTransactions(accountId)
         elif keyword == "Sent":
-            return transactions.getSenderAccountTransactions(TransactionTable, accountId)
+            return self.TransactionTable.getSenderAccountTransactions(accountId)
 
     def filterTransactionsByAmount(self, accountId, amount, keyword):
-        TransactionTable = transactions()
 
-        allTransactions = transactions.getSenderAccountTransactions(TransactionTable, accountId) + \
-            transactions.getReceiverAccountTransactions(TransactionTable, accountId)
+        allTransactions = self.TransactionTable.getSenderAccountTransactions( accountId) + \
+            self.TransactionTable.getReceiverAccountTransactions(accountId)
 
         filteredTransactions = []
 
