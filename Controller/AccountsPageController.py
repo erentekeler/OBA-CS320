@@ -28,7 +28,7 @@ class AccountsPageController():
             elif(events=='AccNames'):
                 view['Balance'].update('Balance:  '+str(self.ab.getAccountBalanceFromAccountName(values['AccNames'],self.customer)[0]))
                 view['currency'].update('Currency Type: '+str(self.ab.getCurrencyFromAccountName(values['AccNames'],self.customer)[0]))
-                view['accID'].update('Account ID: '+str(self.ab.getAccountIdFromAccountName(values['AccNames'],self.customer[0])))
+                view['accID'].update('Account ID: '+str(self.ab.getAccountIdFromAccountName(values['AccNames'],self.customer)[0]))
         view.close()
 
 
