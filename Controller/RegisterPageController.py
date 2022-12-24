@@ -27,12 +27,13 @@ class RegisterPageController(bc.BankingController):
     def openPage(self):
         while True:
             events, values = self.view.read()
-            name = values['Name'].strip()
-            surname = values['Surname'].strip()
-            tckn = values['ID'].strip()
-            password = values['Password']
+
             if events == "Create Account":
                 data = cus.Customer()
+                name = values['Name'].strip()
+                surname = values['Surname'].strip()
+                tckn = values['ID'].strip()
+                password = values['Password']
                 if data.registerCheck(tckn):
                     data.createUser(name, surname, password, tckn)
                     sg.popup('Success', 'You have created your account successfully')

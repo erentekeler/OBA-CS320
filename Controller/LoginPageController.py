@@ -23,10 +23,9 @@ class LoginPageController(bc.BankingController):
         while True:
             events, values = self.view.read()   
 
-            identitiy_num = values['ID']
-            user_password = values['Password']
-
             if(events == 'LOGIN'):
+                identitiy_num = values['ID']
+                user_password = values['Password']
                 if(self.model.loginCheck(identitiy_num,user_password)):
                     self.view.close()
                     data=ur.UserRepository()
