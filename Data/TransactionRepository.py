@@ -23,7 +23,7 @@ class TransactionRepository:
         return result
 
     def createTransaction(self, senderAccountId, receiverAccountId, amount, currencyType):
-        now = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
+        now = datetime.today().strftime('%Y-%m-%d')
         query = f'INSERT INTO Transaction (SenderAccountId, ReceiverAccountId, TransactionDate, Amount, CurrencyType)' \
                 f' VALUES (\'{senderAccountId}\', \'{receiverAccountId}\', \'{now}\', \'{amount}\', \'{currencyType}\')'
         result = self.connector.executeQuery(query, True)

@@ -27,27 +27,21 @@ class Transaction:
             return True
         else: return False
 
-    def filterTransactionsByType(self, accountId, keyword):
+    def filterTransactions(self, userId, key):
+        if key == 1:
+            received = self.TransactionTable.getReceivedTransactions(userId)
+            if(received is not None):
+                received = list(received)
+                received.reverse()
+                received = received[0:5]
+                return received
+            else: return []
+        elif key == 2:
+            sent = self.TransactionTable.getSentTransactions(userId)
+            if (sent is not None):
+                sent = list(sent)
+                sent.reverse()
+                sent = sent[0:5]
+                return sent
+            else: return []
 
-        if keyword == "Received":
-            return self.TransactionTable.getReceiverAccountTransactions(accountId)
-        elif keyword == "Sent":
-            return self.TransactionTable.getSenderAccountTransactions(accountId)
-
-    def filterTransactionsByAmount(self, accountId, amount, keyword):
-
-        allTransactions = self.TransactionTable.getSenderAccountTransactions( accountId) + \
-            self.TransactionTable.getReceiverAccountTransactions(accountId)
-
-        filteredTransactions = []
-
-        if keyword == "Larger":
-            for transaction in allTransactions:
-                if transaction[4] >= amount:
-                    filteredTransactions.append(transaction)
-        elif keyword == "Less Than":
-            for transaction in allTransactions:
-                if transaction[4] <= amount:
-                    filteredTransactions.append(transaction)
-
-        return filteredTransactions
