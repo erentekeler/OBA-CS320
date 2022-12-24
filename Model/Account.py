@@ -27,37 +27,53 @@ class Account:
         else: return False
 
     def getCurrencyData(self,fromCurrencyType):
+        if (fromCurrencyType == "TL"):
+            fromCurrency = "TRY"
+        else:
+            fromCurrency = fromCurrencyType
+
         url = 'https://v6.exchangerate-api.com/v6/c6c7034ecf734c77fc0c296c/latest/' + str(fromCurrencyType)
         response = requests.get(url)
         data = response.json()
-        return data["conversion_rates"]
+        return data['conversion_rates']
 
     def exchangeCurrency(self, userId, fromCurrencyType, fromAccountName,toCurrencyType, toAccountName, amount):
-        if(fromCurrencyType == "TL"): fromCurrency = "TRY"
+        if(fromCurrencyType == 'TL'): fromCurrency = 'TRY'
         else: fromCurrency = fromCurrencyType
 
-        if (toCurrencyType == "TL"): toCurrency = "TRY"
+        if (toCurrencyType == 'TL'): toCurrency = 'TRY'
         else: toCurrency = toCurrencyType
 
-        fromAccountId = self.AccountTable.getAccountIdFromAccountName(fromAccountName,userId)
-        fromBalance = float(self.AccountTable.getAccountBalanceFromAccountName(fromAccountName, userId))
+        fromAccountId = self.AccountTable.getAccountIdFromAccountName(fromAccountName,userId)[0]
+        fromBalance = float(self.AccountTable.getAccountBalanceFromAccountName(fromAccountName, userId)[0])
 
-        toAccountId = self.AccountTable.getAccountIdFromAccountName(toAccountName,userId)
-        toBalance = float(self.AccountTable.getAccountBalanceFromAccountName(toAccountName, userId))
+        toAccountId = self.AccountTable.getAccountIdFromAccountName(toAccountName,userId)[0]
+        toBalance = float(self.AccountTable.getAccountBalanceFromAccountName(toAccountName, userId)[0])
 
         data = self.getCurrencyData(fromCurrency)
-        self.AccountTable.updateBalance(float(fromBalance - amount), fromAccountId)
-        self.AccountTable.updateBalance(float(toBalance + amount*float(data[toCurrency])), toAccountId)
+        self.AccountTable.updateBalance(float(fromBalance - float(amount)), fromAccountId)
+        self.AccountTable.updateBalance(float(toBalance + float(amount)*float(data[toCurrency])), toAccountId)
 
 
     def getCorrespondingAmount(self, fromCurrencyType, toCurrencyType):
-        data = self.getCurrencyData(fromCurrencyType)
-        return data[toCurrencyType]
+        if (fromCurrencyType == 'TL'): fromCurrency = 'TRY'
+        else: fromCurrency = fromCurrencyType
 
+        if (toCurrencyType == 'TL'): toCurrency = 'TRY'
+        else: toCurrency = toCurrencyType
 
-
+        data = self.getCurrencyData(fromCurrency)
+        return float(data[toCurrency])
 
 
 
 a = Account()
+fromAccountId = a.AccountTable.getAccountIdFromAccountName("TL hesabım",4)
+print(fromAccountId)
+fromBalance = float(a.AccountTable.getAccountBalanceFromAccountName("TL hesabım",4)[0])
+print(fromBalance)
 
+toAccountId = a.AccountTable.getAccountIdFromAccountName("Dolar hesabım", 4)
+print(toAccountId)
+toBalance = float(a.AccountTable.getAccountBalanceFromAccountName("Dolar hesabım", 4)[0])
+print(toBalance)

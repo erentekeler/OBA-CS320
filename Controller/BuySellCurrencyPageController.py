@@ -1,6 +1,6 @@
 import sys
 import os
-import PySimpleGUI
+import PySimpleGUI as sg
 os.path.normpath(os.getcwd() + os.sep + os.pardir)
 sys.path.insert(1, os.getcwd())
 from GUI import SellBuyCurrency
@@ -26,12 +26,15 @@ class BuySellCurrencyPageController():
                 view['balance'].update('Balance:  '+str(self.ab.getAccountBalanceFromAccountName(values['fromAccName'],self.customer)[0]))
                 continue
             elif(events=='fromCurType'):
-                view['fromAccName'].update(value='', values=self.ab.getAccountNameFromCurrencyType(self.customer,values['fromCurType']))
+                if(self.ab.getAccountNameFromCurrencyType(self.customer,values['fromCurType']) is not None):
+                    view['fromAccName'].update(value='', values=self.ab.getAccountNameFromCurrencyType(self.customer,values['fromCurType']))
                 if(values['toCurType']!=''):
                     view['currencyRate'].update('1 '+str(values['fromCurType'])+' = '+str(self.ac.getCorrespondingAmount(values['fromCurType'],values['toCurType']))+ ' ' +str(values['toCurType']))
             elif(events=='toCurType'):
-                view['toAccName'].update(value='', values=self.ab.getAccountNameFromCurrencyType(self.customer,values['toCurType']))
-                view['currencyRate'].update('1 '+str(values['fromCurType'])+' = '+str(self.ac.getCorrespondingAmount(values['fromCurType'],values['toCurType']))+ ' ' +str(values['toCurType']))
+                if (self.ab.getAccountNameFromCurrencyType(self.customer, values['toCurType']) is not None):
+                    view['toAccName'].update(value='', values=self.ab.getAccountNameFromCurrencyType(self.customer,values['toCurType']))
+                if (values['fromCurType'] != ''):
+                    view['currencyRate'].update('1 ' + str(values['fromCurType']) + ' = ' + str(self.ac.getCorrespondingAmount(str(values['fromCurType']),str(values['toCurType']))) + ' ' + str(values['toCurType']))
             elif(events=='Exchange'):
                 if(values['amount']=='' or values['toAccName']=='' or values['fromAccName']==''):
                     sg.popup('Fail','Please fill up all informations')
@@ -45,7 +48,7 @@ class BuySellCurrencyPageController():
                     sg.popup('Success','You have successfully exchange currency')
                 
 
-            elif(events=='Go Back' or events=='WIN_CLOSE'):
+            elif(events=='Go Back' or events== sg.WIN_CLOSED):
                 break
         view.close()
 

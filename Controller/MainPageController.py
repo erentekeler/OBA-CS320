@@ -1,9 +1,9 @@
 import sys
 import os
+import PySimpleGUI as sg
 os.path.normpath(os.getcwd() + os.sep + os.pardir)
 sys.path.insert(1,os.getcwd())
 from GUI import mainPage
-import Controller
 from Controller import BankingController as bc
 from Controller import NewAccountPageController as Na
 from Controller import AccountsPageController as ap
@@ -44,7 +44,7 @@ class MainPageController(bc.BankingController):
             elif(events=='Buy/Sell Currency'):
                 buysell=Bs.BuySellCurrencyPageController(self.customer)
                 buysell.openPage()
-            elif(events=="Logout"):
+            elif(events=="Logout" or events == sg.WIN_CLOSED):
                 break              
         self.view.close() 
 

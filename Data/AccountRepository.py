@@ -66,7 +66,7 @@ class AccountRepository:
         return result
 
     def getCurrencyFromAccountName(self, accountName, userId):
-        query = "select CurrencyType from Account where AccountName = " +  "\'" + str(accountName) + "\'" + " and UserId = " + str(userId)
+        query = "select CurrencyType from Account where AccountName = " + "\'" + str(accountName) + "\'" + " and UserId = " + str(userId)
         result = self.connector.executeQuery(query)
         return result
 
@@ -89,7 +89,8 @@ class AccountRepository:
     def getAccountNameFromCurrencyType(self, userId, currencyType):
         query = "select AccountName from account as a where userID = " + str(userId) + " and currencyType= " + "\'" + str(currencyType) + "\'"
         result = self.connector.executeQuery(query)
-        return result[0]
+        if(result is None): return None
+        else: return result
 
 
     def returnMultipleRowAsList(self, rows):
@@ -106,7 +107,6 @@ class AccountRepository:
     #     result = self.connector.executeQuery(query)[0]
     #     return result
 
-A = AccountRepository()
 # A.getAccountNamesOfUser(3)
 # A.createAccount("Eren", "TL", "1234567890", 1)
 # A.updateBalance(350, "1234567890")

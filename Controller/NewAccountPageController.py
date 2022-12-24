@@ -24,7 +24,7 @@ class NewAccountPageController():
             events, values = view.read()
             acc_name=values['accountName']
             acc_currency=values['currency']
-            if(events=="Go Back"):
+            if(events=="Go Back" or events == sg.WIN_CLOSED):
                 break
             elif(events=="CREATE ACCOUNT"):
                 print(self.customer)

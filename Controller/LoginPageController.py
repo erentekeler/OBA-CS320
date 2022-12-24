@@ -45,6 +45,8 @@ class LoginPageController(bc.BankingController):
                 identitiy_num = ""
                 user_password = ""
                 continue
+            elif(events == sg.WIN_CLOSED):
+                break
                 
         view.close()
         

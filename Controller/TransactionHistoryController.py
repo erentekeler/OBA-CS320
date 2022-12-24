@@ -1,5 +1,6 @@
 import sys
 import os
+import PySimpleGUI as sg
 os.path.normpath(os.getcwd() + os.sep + os.pardir)
 sys.path.insert(1, os.getcwd())
 from GUI import TransactionHistory
@@ -37,6 +38,6 @@ class TransactionHistoryController():
                     view[keylist1[2]+str(i)].update(str(sentTransaction[i-1][2]))
                     view[keylist1[3]+str(i)].update(str(sentTransaction[i-1][3]))
                 continue
-            elif(events=='Go Back'):
+            elif(events=='Go Back' or events == sg.WIN_CLOSED):
                 break
         view.close()

@@ -45,7 +45,7 @@ class RegisterPageController(bc.BankingController):
                     sg.popup('Missing Info', 'Please fill out everything!')
                 elif not data.registerCheck(tckn):
                     sg.popup('Existing ID', 'This ID already registered. Please Try to login!')
-            elif events == "SIGN IN":
+            elif events == "SIGN IN" or events == sg.WIN_CLOSED:
                 name = ""
                 surname = ""
                 tckn = ""

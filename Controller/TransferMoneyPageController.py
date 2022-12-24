@@ -56,7 +56,7 @@ class TransferMoneyPageController():
                 elif(float(values['amount'])>self.ab.getAccountBalanceFromAccountName(values['AccNames'],self.customer)[0]):
                     sg.popup('Transfer Fail', 'You don\'t have enough money')
 
-            elif(events=='Go Back'):
+            elif(events=='Go Back' or events == sg.WIN_CLOSED):
                 break
 
         view.close()

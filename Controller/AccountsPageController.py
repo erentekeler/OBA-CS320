@@ -1,5 +1,6 @@
 import sys
 import os
+import PySimpleGUI as sg
 os.path.normpath(os.getcwd() + os.sep + os.pardir)
 sys.path.insert(1, os.getcwd())
 from GUI import AccountList
@@ -21,7 +22,7 @@ class AccountsPageController():
         view=AccountList.createWindow()
         while True:
             events, values =view.read()
-            if(events=='Go Back'):
+            if(events=='Go Back' or events == sg.WIN_CLOSED):
                 break
             elif(events=='Refresh Accounts'):
                 view['AccNames'].update(value='', values= self.ab.getAccountNamesOfUser(self.customer))
