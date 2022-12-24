@@ -24,7 +24,7 @@ CREATE TABLE Transaction (
   TransactionId int NOT NULL AUTO_INCREMENT,
   SenderAccountId int NOT NULL,
   ReceiverAccountId int NOT NULL,
-  TransactionDate datetime NOT NULL,
+  TransactionDate date NOT NULL,
   Amount double NOT NULL,
   CurrencyType varchar(5) NOT NULL,
   PRIMARY KEY (TransactionId),

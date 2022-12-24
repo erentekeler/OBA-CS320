@@ -9,16 +9,16 @@ def createWindow():
 
         layout = [
                 [sg.Image(logo)],
-                [sg.Text('Select the Currency: ',size = (17, 1), font=('Arial',12,'bold')), sg.Combo(temp_list, size = 40)],
-                # [sg.Text('Select the Account to Send Money to: ',size = (30, 1), font=('Arial',12,'bold')), sg.Combo(temp_list2, size = 40)],
-                [sg.Text('Selling Amount : ',size = (13, 1), font=('Arial',12,'bold')), sg.InputText(key='amount', size=(20,1)),sg.Text('',size = (13, 1), font=('Arial',12,'bold')),sg.Text('Buying Amount : ',size = (13, 1), font=('Arial',12,'bold')), sg.InputText(key='amount', size=(20,1))],
+                [sg.Text('From Currency: ',size = (17, 1), font=('Arial',12,'bold')), sg.Combo(temp_list, size = 10),sg.Text('To Currency: ',size = (17, 1), font=('Arial',12,'bold')), sg.Combo(temp_list, size = 10)],
+                [sg.Text('From Account: ',size = (17, 1), font=('Arial',12,'bold')), sg.Combo(temp_list, size = 10),sg.Text('To Account: ',size = (17, 1), font=('Arial',12,'bold')), sg.Combo(temp_list, size = 10)],
+                [sg.Text('Balance: ',size = (13, 1), font=('Arial',12,'bold'))],
+                [sg.Text('Exchange Amount : ',size = (15, 1), font=('Arial',12,'bold')), sg.InputText(key='amount', size=(15,1))],
         
-        
-                [sg.Button('SELL', size = (10, 1),font=("Arial",20,'bold'), pad=(100,25), button_color='Dark Green'),sg.Button('BUY', size = (10, 1),font=("Arial",20,'bold'), pad=(100,25), button_color='Dark Green')],
-                [sg.Button('Go Back', size = (10, 1),font=("Arial",12,'bold'), pad=(25,25), button_color='Dark Grey')]
+                [sg.Button('Exchange', size = (10, 1),font=("Arial",20,'bold'), pad =(225,30))],
+                [sg.Text('1 $Currency$ = xx ',size = (50, 1), font=('Arial',12,'bold'), pad =(240,1))]
         
                 ]
 
-        window = sg.Window('Sell/Buyy Currency Page - OBA', layout,input, size=(800,500))
+        window = sg.Window('Exchange Money Page - OBA', layout,input, size=(700,500))
         return window
 
