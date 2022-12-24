@@ -1,6 +1,5 @@
 import sys
 import os
-
 os.path.normpath(os.getcwd() + os.sep + os.pardir)
 sys.path.insert(1, os.getcwd())
 from Data import TransactionRepository as tr
@@ -23,11 +22,10 @@ class Transaction:
             self.TransactionTable.createTransaction(fromAccountId, toAccountID, amount, receiverType)
             currBalanceSender = float(self.AccountTable.getAccountBalanceAccountId(fromAccountId)[0])
             currBalanceReceiver = float(self.AccountTable.getAccountBalanceAccountId(toAccountID)[0])
-            self.AccountTable.updateBalance(str(currBalanceSender - amount), fromAccountId)
-            self.AccountTable.updateBalance(str(currBalanceReceiver + amount), toAccountID)
+            self.AccountTable.updateBalance(currBalanceSender - amount, fromAccountId)
+            self.AccountTable.updateBalance(currBalanceReceiver + amount, toAccountID)
             return True
-        else:
-            return False
+        else: return False
 
     def filterTransactionsByType(self, accountId, keyword):
 
@@ -38,8 +36,8 @@ class Transaction:
 
     def filterTransactionsByAmount(self, accountId, amount, keyword):
 
-        allTransactions = self.TransactionTable.getSenderAccountTransactions(accountId) + \
-                          self.TransactionTable.getReceiverAccountTransactions(accountId)
+        allTransactions = self.TransactionTable.getSenderAccountTransactions( accountId) + \
+            self.TransactionTable.getReceiverAccountTransactions(accountId)
 
         filteredTransactions = []
 
