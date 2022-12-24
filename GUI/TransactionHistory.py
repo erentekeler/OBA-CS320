@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 
 def createWindow():
         sg.theme('DarkGreen')   # select theme     
-        temp_list1 = ["accountName1",'Currency1','Buy/Sell1','Amount1']
+        temp_list1 = ["Please",'Filter','Transactions','First']
         temp_list2 = ["accountName2",'Currency2','Buy/Sell2','Amount2']
         temp_list3 = ["accountName3",'Currency3','Buy/Sell3','Amount3']
         temp_list4 = ["accountName4",'Currency4','Buy/Sell4','Amount4']
@@ -11,36 +11,36 @@ def createWindow():
 
         layout = [
                 [sg.Image(logo)],
-                [sg.Text('Filter: ',size = (13, 1), font=('Arial',12,'bold')),sg.Radio('Recieved',"history"),sg.Radio('Sent', "history")],
-                [sg.Text('Account Name  |     Currency    |          BUY/SELL        |     Amount ',size = (100, 1), font=('Arial',12,'bold'))],
+                [sg.Text('Filter: ',size = (13, 1), font=('Arial',12,'bold')),sg.Radio('Recieved',"history",enable_events=True, key='Recieved'),sg.Radio('Sent', "history", enable_events=True, key='Sent')],
+                [sg.Text('Account Name  |     Currency    |          Amount        |     Date  ',size = (100, 1), font=('Arial',12,'bold'))],
                 [sg.Text('',size = (13, 1), font=('Arial',12,'bold'))],
 
                 [
-                sg.Text(str(temp_list1[0]),size = (13, 1), font=('Arial',12,'bold')),
-                sg.Text(str(temp_list1[1]),size = (12, 1), font=('Arial',12,'bold')),
-                sg.Text(str(temp_list1[2]),size = (12, 1), font=('Arial',12,'bold')),
-                sg.Text(str(temp_list1[3]),size = (13, 1), font=('Arial',12,'bold')),],
+                sg.Text(str(temp_list1[0]),key='ac1',size = (13, 1), font=('Arial',12,'bold')),
+                sg.Text(str(temp_list1[1]),key='cur1',size = (12, 1), font=('Arial',12,'bold')),
+                sg.Text(str(temp_list1[2]),key='amount1',size = (12, 1), font=('Arial',12,'bold')),
+                sg.Text(str(temp_list1[3]),key='date1',size = (13, 1), font=('Arial',12,'bold')),],
 
                 [
-                sg.Text(str(temp_list2[0]),size = (13, 1), font=('Arial',12,'bold')),
-                sg.Text(str(temp_list2[1]),size = (12, 1), font=('Arial',12,'bold')),
-                sg.Text(str(temp_list2[2]),size = (12, 1), font=('Arial',12,'bold')),
-                sg.Text(str(temp_list2[3]),size = (13, 1), font=('Arial',12,'bold')),],
+                sg.Text(str(temp_list1[0]),key='ac2',size = (13, 1), font=('Arial',12,'bold')),
+                sg.Text(str(temp_list1[1]),key='cur2',size = (12, 1), font=('Arial',12,'bold')),
+                sg.Text(str(temp_list1[2]),key='amount2',size = (12, 1), font=('Arial',12,'bold')),
+                sg.Text(str(temp_list1[3]),key='date2',size = (13, 1), font=('Arial',12,'bold')),],
                 [
-                sg.Text(str(temp_list3[0]),size = (13, 1), font=('Arial',12,'bold')),
-                sg.Text(str(temp_list3[1]),size = (12, 1), font=('Arial',12,'bold')),
-                sg.Text(str(temp_list3[2]),size = (12, 1), font=('Arial',12,'bold')),
-                sg.Text(str(temp_list3[3]),size = (13, 1), font=('Arial',12,'bold')),],
+                sg.Text(str(temp_list1[0]),key='ac3',size = (13, 1), font=('Arial',12,'bold')),
+                sg.Text(str(temp_list1[1]),key='cur3',size = (12, 1), font=('Arial',12,'bold')),
+                sg.Text(str(temp_list1[2]),key='amount3',size = (12, 1), font=('Arial',12,'bold')),
+                sg.Text(str(temp_list1[3]),key='date3',size = (13, 1), font=('Arial',12,'bold')),],
                 [
-                sg.Text(str(temp_list4[0]),size = (13, 1), font=('Arial',12,'bold')),
-                sg.Text(str(temp_list4[1]),size = (12, 1), font=('Arial',12,'bold')),
-                sg.Text(str(temp_list4[2]),size = (12, 1), font=('Arial',12,'bold')),
-                sg.Text(str(temp_list4[3]),size = (13, 1), font=('Arial',12,'bold')),],
+                sg.Text(str(temp_list1[0]),key='ac4',size = (13, 1), font=('Arial',12,'bold')),
+                sg.Text(str(temp_list1[1]),key='cur4',size = (12, 1), font=('Arial',12,'bold')),
+                sg.Text(str(temp_list1[2]),key='amount4',size = (12, 1), font=('Arial',12,'bold')),
+                sg.Text(str(temp_list1[3]),key='date4',size = (13, 1), font=('Arial',12,'bold')),],
                 [
-                sg.Text(str(temp_list5[0]),size = (13, 1), font=('Arial',12,'bold')),
-                sg.Text(str(temp_list5[1]),size = (12, 1), font=('Arial',12,'bold')),
-                sg.Text(str(temp_list5[2]),size = (12, 1), font=('Arial',12,'bold')),
-                sg.Text(str(temp_list5[3]),size = (13, 1), font=('Arial',12,'bold')),],
+                sg.Text(str(temp_list1[0]),key='ac5',size = (13, 1), font=('Arial',12,'bold')),
+                sg.Text(str(temp_list1[1]),key='cur5',size = (12, 1), font=('Arial',12,'bold')),
+                sg.Text(str(temp_list1[2]),key='amount5',size = (12, 1), font=('Arial',12,'bold')),
+                sg.Text(str(temp_list1[3]),key='date5',size = (13, 1), font=('Arial',12,'bold')),],
                 [sg.Button('Go Back', size = (10, 1),font=("Arial",12,'bold'), pad=(200,10), button_color='Dark Grey')]
 
 
