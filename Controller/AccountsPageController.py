@@ -4,7 +4,7 @@ os.path.normpath(os.getcwd() + os.sep + os.pardir)
 sys.path.insert(1, os.getcwd())
 from GUI import AccountList
 from Data import AccountRepository
-
+from Data import AccountRepository as ac
 
 class AccountsPageController():
     def __init__(self,customer) -> None:
@@ -13,6 +13,7 @@ class AccountsPageController():
         # self.view=self.getView()
         self.view = self.getView(AccountList)
         self.customer=customer
+        self.ab=ac.AccountRepository()
 
     def getView(self, loginPage):
         return loginPage.window
@@ -20,8 +21,13 @@ class AccountsPageController():
     def openPage(self):
         while True:
             events, values = self.view.read()
-
-
+            if(events=='Go Back'):
+                break
+            elif(events=='Refresh Accounts'):
+                self.view['AccNames'].update(value='', values= self.ab.getAccountNamesOfUser(self.customer))
+            elif(events=='AccNames'):
+                self.view['Balance'].update('Balance:  '+str(self.ab.getAccountBalanceFromAccountName(values['AccNames'],self.customer)[0]))
+                self.view['currency'].update('Currency Type: '+str(self.ab.getAccountBalanceAccountId()))
         self.view.close()
 
 
