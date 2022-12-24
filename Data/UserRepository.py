@@ -40,8 +40,4 @@ class UserRepository:
         return result
 
 
-userRepository = UserRepository()
-# userRepository.createUser("Selen","Selena","1234", "1239")
 
-# q = "DELETE FROM " + str("user") + " WHERE UserId= 5"
-# userRepository.connector.executeQuery(q,True)

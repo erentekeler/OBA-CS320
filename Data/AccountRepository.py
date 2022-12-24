@@ -99,14 +99,3 @@ class AccountRepository:
             for data in row:
                 lst.append(data)
         return lst
-
-
-
-    # def countNumberOfUserAccounts(self, userId):
-    #     query = "SELECT Count(*) FROM Account WHERE UserId = " + str(userId)
-    #     result = self.connector.executeQuery(query)[0]
-    #     return result
-
-# A.getAccountNamesOfUser(3)
-# A.createAccount("Eren", "TL", "1234567890", 1)
-# A.updateBalance(350, "1234567890")

@@ -21,6 +21,3 @@ class CreateData:
         userId = self.userRepository.getUserIdFromIdentityNo("11345678910")
         self.accountRepository.createAccount("TL hesabım", "TL", userId)
 
-createData = CreateData()
-createData.createUsers()
-createData.createAccounts()

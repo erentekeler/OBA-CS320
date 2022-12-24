@@ -64,16 +64,3 @@ class Account:
 
         data = self.getCurrencyData(fromCurrency)
         return float(data[toCurrency])
-
-
-
-a = Account()
-fromAccountId = a.AccountTable.getAccountIdFromAccountName("TL hesabım",4)
-print(fromAccountId)
-fromBalance = float(a.AccountTable.getAccountBalanceFromAccountName("TL hesabım",4)[0])
-print(fromBalance)
-
-toAccountId = a.AccountTable.getAccountIdFromAccountName("Dolar hesabım", 4)
-print(toAccountId)
-toBalance = float(a.AccountTable.getAccountBalanceFromAccountName("Dolar hesabım", 4)[0])
-print(toBalance)
