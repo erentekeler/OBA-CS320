@@ -15,7 +15,6 @@ class TransferMoneyPageController():
         super().__init__()
         # self.model=self.getActionModel()
         # self.view=self.getView()
-        self.view = self.getView(transferMoneyPage)
         self.ab = ac.AccountRepository()
         self.acc=Acc.Account()
         self.transaction=TR.Transaction()
@@ -26,20 +25,21 @@ class TransferMoneyPageController():
 
 
     def getView(self, page):
-        return page.window
+        pass
 
     def openPage(self):
-
+        view=transferMoneyPage.createWindow()
         while True:
-            events, values = self.view.read()
+            
+            events, values = view.read()
 
             if(events =="Refresh Accounts List"):
-                self.view['AccNames'].update(value='', values= self.ab.getAccountNamesOfUser(self.customer))
+                view['AccNames'].update(value='', values= self.ab.getAccountNamesOfUser(self.customer))
             elif(events == "AccNames"):
-                self.view['Balance'].update('Account Balance:  '+str(self.ab.getAccountBalanceFromAccountName(values['AccNames'],self.customer)[0]))
+                view['Balance'].update('Account Balance:  '+str(self.ab.getAccountBalanceFromAccountName(values['AccNames'],self.customer)[0]))
             elif(events == 'Verify'):
                 if(self.acc.getUserFullNameFromAccountId(values['receiverID'])):
-                    self.view['reciever'].update('Receiver\'s Name : '+str(self.acc.getUserFullNameFromAccountId(values['receiverID'])))
+                    view['reciever'].update('Receiver\'s Name : '+str(self.acc.getUserFullNameFromAccountId(values['receiverID'])))
                 elif(self.acc.getUserFullNameFromAccountId(values['receiverID'])==False):
                     sg.popup('Fail','There is no matching account ID')
             elif(events=='TRANSFER'):
@@ -56,7 +56,7 @@ class TransferMoneyPageController():
             elif(events=='Go Back'):
                 break
 
-        self.view.close()
+        view.close()
 
 
 
