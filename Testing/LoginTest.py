@@ -6,6 +6,7 @@ sys.path.insert(1, os.getcwd())
 from Model import Customer as cs
 from Data import AccountRepository as acr
 from Data import UserRepository as Ur
+from Controller import LoginPageController as lg
 class LoginTest(unittest.TestCase):
 
     def test_001_1(self):
@@ -40,6 +41,11 @@ class LoginTest(unittest.TestCase):
         self.assertTrue(temp.getCurrencyFromAccountName('Dolar hesabım',4)[0]=='USD')
         self.assertTrue(temp.getAccountIdFromAccountName('TL hesabım',4)[0]==1000000)
         self.assertTrue(temp.getAccountIdFromAccountName('Dolar hesabım',4)[0]==1000001)
+
+    def test_009(self):
+        #when you push logout it terminates the application thus logs out. 
+        self.assertTrue(True)
+        
 
        
 
