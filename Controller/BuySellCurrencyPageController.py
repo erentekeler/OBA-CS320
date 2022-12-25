@@ -38,8 +38,8 @@ class BuySellCurrencyPageController():
                 if (values['fromCurType'] != ''):
                     view['currencyRate'].update('1 ' + str(values['fromCurType']) + ' = ' + str(self.ac.getCorrespondingAmount(str(values['fromCurType']),str(values['toCurType']))) + ' ' + str(values['toCurType']))
             elif(events=='amount'):
-                if(values['fromCurType'] !='' and values['toCurType']!=''):
-                    view['conver'].update(values=str(float(self.ac.getCorrespondingAmount(str(values['fromCurType']),str(values['toCurType'])))*float(values['amount']))+' '+str(values['toCurType']))
+                if(values['fromCurType'] !='' and values['toCurType']!='' and values['amount'] != ''):
+                    view['conver'].update(value=str(float(self.ac.getCorrespondingAmount(str(values['fromCurType']),str(values['toCurType'])))*float(values['amount']))+' '+str(values['toCurType']))
             elif(events=='Exchange'):
                 if(values['amount']=='' or values['toAccName']=='' or values['fromAccName']==''):
                     sg.popup('Fail','Please fill up all informations')
