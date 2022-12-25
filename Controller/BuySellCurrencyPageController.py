@@ -42,19 +42,22 @@ class BuySellCurrencyPageController():
                 if (values['fromCurType'] != ''):
                     view['currencyRate'].update('1 ' + str(values['fromCurType']) + ' = ' + str(self.ac.getCorrespondingAmount(str(values['fromCurType']),str(values['toCurType']))) + ' ' + str(values['toCurType']))
             elif(events=='amount'):
-                
+                try:
+                    if (values['fromCurType'] != '' and values['toCurType'] != '' and values['amount'] == ''):
+                        view['conver'].update(value=str(0) + ' ' + str(values['toCurType']))
+                        continue
 
-                if(values['fromCurType'] !='' and values['toCurType']!='' and values['amount'] != ''):
-                    view['conver'].update(value=str(0)+' '+str(values['toCurType']))
-                    continue
-                
-                try: float(values['amount'])
+                    elif (values['amount'] != '' and values['fromCurType'] == '' and values['toCurType'] == ''):
+                        sg.popup('Please select all the necessary fields')
+                        continue
+
+                    elif (values['fromCurType'] != '' and values['toCurType'] != '' and values['amount'] != ''):
+                        temp = float(self.ac.getCorrespondingAmount(str(values['fromCurType']), str(values['toCurType']))) * float(values['amount'])
+                        temp = '{:.3f}'.format(temp)
+                        view['conver'].update(value=str(temp) + ' ' + str(values['toCurType']))
                 except:
-                    sg.popup('please fill numeric numbers only') 
+                    sg.popup('please fill numeric numbers only')
                     continue
-
-                if(values['fromCurType'] !='' and values['toCurType']!=''):
-                     view['conver'].update(value=str(float(self.ac.getCorrespondingAmount(str(values['fromCurType']),str(values['toCurType'])))*float(values['amount']))+' '+str(values['toCurType']))
                 
                  
             elif(events=='Exchange'):
