@@ -41,6 +41,21 @@ class LoginTest(unittest.TestCase):
         self.assertEqual(repo.getAccountBalanceAccountId(account_ID1)[0], 120.0)
         self.assertEqual(repo.getAccountBalanceAccountId(account_ID2)[0], 180.0)
 
+    def test_007(self):
+        user_ID = "1"
+        account_name1 = "Test_Account_Dollar"
+        account_name2 = "Test_Account_Euro"
+        acc.Account.createAccount(acc.Account(), account_name1, "USD", user_ID)
+        acc.Account.createAccount(acc.Account(), account_name2, "EUR", user_ID)
+        repo = AR.AccountRepository()
+        account_ID1 = repo.getAccountIdFromAccountName(account_name1, user_ID)[0]
+        account_ID2 = repo.getAccountIdFromAccountName(account_name2, user_ID)[0]
+        repo.updateBalance(100, account_ID1)
+        repo.updateBalance(100, account_ID2)
+        acc.Account.exchangeCurrency(acc.Account(), user_ID, "USD", account_name1, "EUR", account_name2, 10)
+        self.assertLess(repo.getAccountBalanceAccountId(account_ID1)[0], 100)
+        self.assertGreater(repo.getAccountBalanceAccountId(account_ID2)[0], 100)
+
 
 if __name__ == '__main__':
     unittest.main()
