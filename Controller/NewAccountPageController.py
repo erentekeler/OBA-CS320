@@ -27,15 +27,15 @@ class NewAccountPageController():
             if(events=="Go Back" or events == sg.WIN_CLOSED):
                 break
             elif(events=="CREATE ACCOUNT"):
+                temp = self.acc.createAccount(acc_name,acc_currency,self.customer)
                 if(acc_name == '' or acc_currency == ''):
                     sg.popup('Failed', 'Please fill all information!')
                     continue
-                elif(self.acc.createAccount(acc_name,acc_currency,self.customer) == False):
+                elif(temp == False):
                     sg.popup('Failed', 'You have an account with the same name!')
                     continue
-                elif (self.acc.createAccount(acc_name, acc_currency, self.customer)):
+                elif (temp == True):
                     sg.popup('Success', 'You Have Successfully created new Account')
                     break
-
         view.close()
 
