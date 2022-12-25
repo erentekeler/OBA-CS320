@@ -28,6 +28,8 @@ class BuySellCurrencyPageController():
             elif(events=='fromCurType'):
                 if(self.ab.getAccountNameFromCurrencyType(self.customer,values['fromCurType']) is not None):
                     view['fromAccName'].update(value='', values=self.ab.getAccountNameFromCurrencyType(self.customer,values['fromCurType']))
+                elif(self.ab.getAccountNameFromCurrencyType(self.customer,values['fromCurType']) is None):
+                    view['fromAccName'].update(value='', values='')
                 if(values['toCurType']!=''):
                     view['currencyRate'].update('1 '+str(values['fromCurType'])+' = '+str(self.ac.getCorrespondingAmount(values['fromCurType'],values['toCurType']))+ ' ' +str(values['toCurType']))
             elif(events=='toAccName'):
@@ -35,11 +37,26 @@ class BuySellCurrencyPageController():
             elif(events=='toCurType'):
                 if (self.ab.getAccountNameFromCurrencyType(self.customer, values['toCurType']) is not None):
                     view['toAccName'].update(value='', values=self.ab.getAccountNameFromCurrencyType(self.customer,values['toCurType']))
+                elif(self.ab.getAccountNameFromCurrencyType(self.customer, values['toCurType']) is None):
+                    view['toAccName'].update(value='', values='')
                 if (values['fromCurType'] != ''):
                     view['currencyRate'].update('1 ' + str(values['fromCurType']) + ' = ' + str(self.ac.getCorrespondingAmount(str(values['fromCurType']),str(values['toCurType']))) + ' ' + str(values['toCurType']))
             elif(events=='amount'):
+                
+
                 if(values['fromCurType'] !='' and values['toCurType']!='' and values['amount'] != ''):
-                    view['conver'].update(value=str(float(self.ac.getCorrespondingAmount(str(values['fromCurType']),str(values['toCurType'])))*float(values['amount']))+' '+str(values['toCurType']))
+                    view['conver'].update(value=str(0)+' '+str(values['toCurType']))
+                    continue
+                
+                try: float(values['amount'])
+                except:
+                    sg.popup('please fill numeric numbers only') 
+                    continue
+
+                if(values['fromCurType'] !='' and values['toCurType']!=''):
+                     view['conver'].update(value=str(float(self.ac.getCorrespondingAmount(str(values['fromCurType']),str(values['toCurType'])))*float(values['amount']))+' '+str(values['toCurType']))
+                
+                 
             elif(events=='Exchange'):
                 if(values['amount']=='' or values['toAccName']=='' or values['fromAccName']==''):
                     sg.popup('Fail','Please fill up all informations')
