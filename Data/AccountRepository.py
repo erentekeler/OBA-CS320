@@ -25,17 +25,17 @@ class AccountRepository:
                     tempResult = "You already have an account with the same name."
                     break
                 else:
-                    query = f'INSERT INTO Account (AccountName, CurrencyType, Balance, UserId) VALUES (\'{accountName}\', \'{currencyType}\', \'{0}\', \'{userId}\')'
+                    query = "INSERT INTO Account (AccountName, CurrencyType, Balance, UserId) VALUES (" + "\'" + str(accountName) + "\'" + " , " + "\'" + str(currencyType) + "\'" +" , " +  str(0) + " , " + str(userId) +")"
                     tempResult = query
                     continue
             result = tempResult
             if tempResult == query:
-                result = self.connector.executeQuery(query)
+                result = self.connector.executeQuery(query,True)
                 return True
             else:
                 return False
         else:
-            query = f'INSERT INTO Account (AccountName, CurrencyType, Balance, UserId) VALUES (\'{accountName}\', \'{currencyType}\', \'{0}\', \'{userId}\')'
+            query = "INSERT INTO Account (AccountName, CurrencyType, Balance, UserId) VALUES (" + "\'" + str(accountName) + "\'" + " , " + "\'" + str(currencyType) + "\'" +" , " +  str(0) + " , " + str(userId) +")"
             result = self.connector.executeQuery(query, True)
             return True
 
