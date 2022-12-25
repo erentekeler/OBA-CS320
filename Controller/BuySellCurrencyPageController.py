@@ -30,10 +30,11 @@ class BuySellCurrencyPageController():
                     view['fromAccName'].update(value='', values=self.ab.getAccountNameFromCurrencyType(self.customer,values['fromCurType']))
                 if(values['toCurType']!=''):
                     view['currencyRate'].update('1 '+str(values['fromCurType'])+' = '+str(self.ac.getCorrespondingAmount(values['fromCurType'],values['toCurType']))+ ' ' +str(values['toCurType']))
+            elif(events=='toAccName'):
+                view['balanceTo'].update('Balance:  '+str(self.ab.getAccountBalanceFromAccountName(values['toAccName'],self.customer)[0]))
             elif(events=='toCurType'):
                 if (self.ab.getAccountNameFromCurrencyType(self.customer, values['toCurType']) is not None):
                     view['toAccName'].update(value='', values=self.ab.getAccountNameFromCurrencyType(self.customer,values['toCurType']))
-                    view['balanceTo'].update('Balance:  '+str(self.ab.getAccountBalanceFromAccountName(values['toAccName'],self.customer)[0]))
                 if (values['fromCurType'] != ''):
                     view['currencyRate'].update('1 ' + str(values['fromCurType']) + ' = ' + str(self.ac.getCorrespondingAmount(str(values['fromCurType']),str(values['toCurType']))) + ' ' + str(values['toCurType']))
             elif(events=='amount'):
