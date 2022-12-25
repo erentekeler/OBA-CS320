@@ -33,8 +33,12 @@ class BuySellCurrencyPageController():
             elif(events=='toCurType'):
                 if (self.ab.getAccountNameFromCurrencyType(self.customer, values['toCurType']) is not None):
                     view['toAccName'].update(value='', values=self.ab.getAccountNameFromCurrencyType(self.customer,values['toCurType']))
+                    view['balanceTo'].update('Balance:  '+str(self.ab.getAccountBalanceFromAccountName(values['toAccName'],self.customer)[0]))
                 if (values['fromCurType'] != ''):
                     view['currencyRate'].update('1 ' + str(values['fromCurType']) + ' = ' + str(self.ac.getCorrespondingAmount(str(values['fromCurType']),str(values['toCurType']))) + ' ' + str(values['toCurType']))
+            elif(events=='amount'):
+                if(values['fromCurType'] !='' and values['toCurType']!=''):
+                    view['conver'].update(values=str(float(self.ac.getCorrespondingAmount(str(values['fromCurType']),str(values['toCurType'])))*float(values['amount']))+' '+str(values['toCurType']))
             elif(events=='Exchange'):
                 if(values['amount']=='' or values['toAccName']=='' or values['fromAccName']==''):
                     sg.popup('Fail','Please fill up all informations')
@@ -46,7 +50,7 @@ class BuySellCurrencyPageController():
                 elif(float(values['amount'])<=self.ab.getAccountBalanceFromAccountName(values['fromAccName'],self.customer)[0]):
                     self.ac.exchangeCurrency(self.customer,values['fromCurType'],values['fromAccName'],values['toCurType'],values['toAccName'],values['amount'])
                     sg.popup('Success','You have successfully exchange currency')
-                
+                break
 
             elif(events=='Go Back' or events== sg.WIN_CLOSED):
                 break

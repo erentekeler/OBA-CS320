@@ -11,8 +11,8 @@ def createWindow():
                 [sg.Image(logo)],
                 [sg.Text('From Currency: ',size = (17, 1), font=('Arial',12,'bold')), sg.Combo(temp_list, key='fromCurType', enable_events= True, size = 10),sg.Text('To Currency: ',size = (17, 1), font=('Arial',12,'bold')), sg.Combo(temp_list, key='toCurType', enable_events=True, size = 10)],
                 [sg.Text('From Account: ',size = (17, 1), font=('Arial',12,'bold')), sg.Combo([], key='fromAccName', enable_events=True, size = 10),sg.Text('To Account: ',size = (17, 1), font=('Arial',12,'bold')), sg.Combo(temp_list, key='toAccName', enable_events=True, size = 10)],
-                [sg.Text('Balance: ', key='balance', size = (13, 1), font=('Arial',12,'bold'))],
-                [sg.Text('Exchange Amount : ', size = (15, 1), font=('Arial',12,'bold')), sg.InputText(key='amount', size=(15,1))],
+                [sg.Text('Balance: ', key='balance', size = (13, 1), font=('Arial',12,'bold')),sg.Text('Balance: ', key='balanceTo', size = (13, 1), font=('Arial',12,'bold'))],
+                [sg.Text('Exchange Amount : ', size = (15, 1), font=('Arial',12,'bold')), sg.InputText(key='amount',enable_events=True , size=(15,1)),sg.Text('', key='conver', size = (15, 1), font=('Arial',12,'bold'))],
         
                 [sg.Button('Exchange', size = (10, 1),font=("Arial",20,'bold'), pad =(225,30))],
                 [sg.Text('1 $Currency$ = xx ', key='currencyRate',size = (50, 1), font=('Arial',12,'bold'), pad =(240,1))],
