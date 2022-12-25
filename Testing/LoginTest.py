@@ -3,14 +3,15 @@ import unittest
 
 class LoginTest(unittest.TestCase):
 
-    def test_already_existing_user_register(self):
+    def test_001_1(self):
         pass
 
-    def test_new_user_register(self):
+    def test_001_2(self):
         pass
 
-    def test_unmatching_user_inputs(self):
+    def test_002(self):
         pass
 
-    def test_account_listing(self):
+    def test_003(self):
         pass
+
